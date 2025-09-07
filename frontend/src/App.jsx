@@ -1,13 +1,11 @@
-
 import './index.css'
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
     <>
-     <div className='text-red-400'>
-      en peyar hari varma
-     </div>
+        <Navbar />
     </>
   )
 }

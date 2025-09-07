@@ -1,15 +1,18 @@
 import { Star } from "lucide-react";
-
+import Duke200 from "../assets/Duke200.webp";
+import Duke160 from "../assets/Duke160.avif";
+import Duke390 from "../assets/Duke390.webp";
 function BikeShowCase() {
+
+
   return (
     <div className="min-h-screen flex flex-col">
-
       {/* Main Section */}
       <main className="flex-1 flex flex-col items-center justify-center relative text-center">
         {/* Left preview */}
         <div className="absolute left-10 flex flex-col items-center">
           <div className="w-28 h-20 border rounded-lg flex items-center justify-center bg-white shadow">
-            <img src="/bike-red.png" alt="Bike Red" className="w-20" />
+            <img src={Duke200} alt="Bike Red" className="w-20" />
           </div>
           <span className="text-xs mt-2">DUKE 160</span>
         </div>
@@ -17,13 +20,13 @@ function BikeShowCase() {
         {/* Right preview */}
         <div className="absolute right-10 flex flex-col items-center">
           <div className="w-28 h-20 border rounded-lg flex items-center justify-center bg-white shadow">
-            <img src="" alt="Bike Blue" className="w-20" />
+            <img src={Duke390} alt="Bike Blue" className="w-20" />
           </div>
           <span className="text-xs mt-2">DUKE 390</span>
         </div>
 
         {/* Main Bike */}
-        <img src="../assets/Duke 160.avif" alt="Bike Black" className="w-[500px] max-w-full" />
+        <img src={Duke200} alt="Bike Black" className="w-[500px] max-w-full" />
 
         {/* Product Info */}
         <div className="mt-6">

@@ -1,5 +1,4 @@
-import './index.css'
-import { Navigation , StatCard, BikeVariant } from './components/Nav';
+import './index.css';
 import MotovexLanding from './components/MainComponent';
 
 function App() {

@@ -2,7 +2,7 @@ import Bike from "../models/bike.js";
 
 export async function getAllBikes(req, res) {
     try {
-        const bikes = await Bike.find();
+        const bikes = await Bike.find().sort({createdAt : -1});
         res.status(200).json(bikes);
         console.log("Fetched all bikes successfully : ", bikes);
     }

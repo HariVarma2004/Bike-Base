@@ -11,11 +11,6 @@ import DesktopLayout from './layout/DesktopLayout.jsx';
 const MainComponent = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const bikeVariants = [
-    { color: '#3B82F6', name: 'Blue' },
-    { color: '#EF4444', name: 'Red' },
-    { color: '#10B981', name: 'Green' }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">

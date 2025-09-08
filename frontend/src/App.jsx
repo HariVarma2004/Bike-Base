@@ -1,13 +1,12 @@
 import './index.css'
-import Navbar from './components/Navbar';
-import BikeShowCase from './components/BikeShowCase';
+import { Navigation , StatCard, BikeVariant } from './components/Nav';
+import MotovexLanding from './components/MainComponent';
 
 function App() {
 
   return (
     <>
-        <Navbar />
-        <BikeShowCase />
+      <MotovexLanding />
     </>
   )
 }

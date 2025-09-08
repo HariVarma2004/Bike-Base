@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import Duke200 from "../assets/Duke200.webp";
-import Duke160 from "../assets/Duke160.avif";
+import Duke160 from "../assets/Duke160.png";
 import Duke390 from "../assets/Duke390.webp";
 
 const bikes = [

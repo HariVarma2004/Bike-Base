@@ -8,17 +8,17 @@ const bikes = [
   {
     name: "DUKE 160",
     img: Duke160,
-    weight: "7.85kg",
+    weight: "147kg",
   },
   {
     name: "DUKE 200",
     img: Duke200,
-    weight: "8.45kg",
+    weight: "159kg",
   },
   {
     name: "DUKE 390",
     img: Duke390,
-    weight: "9.25kg",
+    weight: "168.3kg",
   },
 ];
 

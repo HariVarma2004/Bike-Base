@@ -8,7 +8,7 @@ const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
         <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Home</a>
         <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Models</a>
         <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Features</a>
-        <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Contact</a>
+        <a href="contact.js" className="text-gray-300 hover:text-cyan-500 transition">Contact</a>
       </div>
       
       {/* Mobile Menu Button */}

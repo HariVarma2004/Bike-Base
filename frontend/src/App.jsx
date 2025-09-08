@@ -1,6 +1,7 @@
 import './index.css';
 import MotovexLanding from './components/MainComponent';
 import Footer from './components/Footer/footer'; // ✅ correct path
+import ContactUs from './components/ContactUs/contact';
 
 function App() {
   return (
@@ -10,8 +11,12 @@ function App() {
         <MotovexLanding />
       </main>
 
+      {/* ContactUs */}
+      <ContactUs/>
+
       {/* Footer */}
       <Footer />
+
     </div>
   );
 }

@@ -8,7 +8,7 @@ import DesktopLayout from './layout/DesktopLayout.jsx';
 
 
 // Main Component
-const MotovexLanding = () => {
+const MainComponent = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const bikeVariants = [
@@ -43,4 +43,4 @@ const MotovexLanding = () => {
   );
 };
 
-export default MotovexLanding;
+export default MainComponent;

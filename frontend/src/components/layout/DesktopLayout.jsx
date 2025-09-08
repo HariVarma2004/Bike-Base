@@ -2,6 +2,7 @@ import { useState } from "react";
 import BikeVariant from "../ui/BikeVariant";
 import StatCard from "../ui/StatCard";
 
+import Duke390 from '../../assets/duke390.webp'
 
 const DesktopLayout = () => {
     const bikeVariants = [
@@ -44,10 +45,14 @@ const DesktopLayout = () => {
                     </h1>
 
                     {/* Desktop Bike Image */}
-                    <div className="relative mx-auto w-80 lg:w-96 h-56 lg:h-64 mb-8">
+                    <div className="relative mx-auto w-96 lg:w-[32rem] h-64 lg:h-[22rem] mb-8">
                         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-teal-400/20 rounded-3xl blur-3xl"></div>
-                        <div className="relative bg-gradient-to-br from-gray-700 to-gray-800 rounded-3xl h-full flex items-center justify-center border border-gray-600 shadow-2xl">
-                            <div className="text-5xl lg:text-6xl">🏍</div>
+                        <div className="relative bg-gradient-to-br from-gray-700 to-gray-800 rounded-3xl h-full flex items-center justify-center border border-gray-600 shadow-2xl overflow-hidden">
+                            <img
+                                src={Duke390}
+                                alt="Motovex Bike"
+                                className="w-full h-full object-contain"
+                            />
                         </div>
                     </div>
 

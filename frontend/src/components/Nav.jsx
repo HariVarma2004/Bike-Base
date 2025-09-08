@@ -37,9 +37,9 @@ const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
       onClick={onToggleMobileMenu}
       className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1"
     >
-      <div className={w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}}></div>
-      <div className={w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}}></div>
-      <div className={w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}}></div>
+      <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
+      <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></div>
+      <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
     </button>
   );
 
@@ -99,3 +99,4 @@ const BikeVariant = ({ color, active = false, onClick }) => (
   </button>
 );
 
+export { Navigation, StatCard, BikeVariant };

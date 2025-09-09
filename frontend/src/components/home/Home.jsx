@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
 
-const images = [
-  "https://via.placeholder.com/1200x600/FF5733/FFFFFF?text=Slide+1",
-  "https://via.placeholder.com/1200x600/33C1FF/FFFFFF?text=Slide+2",
-  "https://via.placeholder.com/1200x600/75FF33/FFFFFF?text=Slide+3",
-];
+// ✅ Correct imports (check your filenames carefully!)
+// import Hero1 from "../../assets/Hero1.jpg";
+// import Hero2 from "../../assets/Hero2.webp";
+// import Hero3 from "../../assets/Hero3.webp";
+// import Hero4 from "../../assets/Hero4.jpg";
+import Hero5 from "../../assets/Hero5.jpg";
+import Hero6 from "../../assets/Hero6.jpg";
+import Hero7 from "../../assets/Hero7.jpg";
+import Hero8 from "../../assets/Hero8.jpg";
+import Hero9 from "../../assets/Hero9.jpg";
+
+const images = [ Hero9, Hero5, Hero6, Hero7, Hero8 ];
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto slide every 3s
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-gray-900 overflow-hidden">
@@ -31,11 +45,24 @@ const Home = () => {
             }`}
           />
         ))}
+
+        {/* Prev / Next Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70"
+        >
+          ←
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70"
+        >
+          →
+        </button>
       </div>
 
-      {/* Active Line Indicator + Button */}
+      {/* Dots + Button */}
       <div className="absolute bottom-12 flex flex-col items-center w-full">
-        {/* Line Indicator ABOVE the button */}
         <div className="flex mb-4 space-x-2">
           {images.map((_, index) => (
             <div
@@ -48,7 +75,6 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Button */}
         <button className="px-6 py-3 bg-blue-600 text-white rounded-2xl shadow-lg hover:bg-blue-700 transition">
           Explore Now
         </button>

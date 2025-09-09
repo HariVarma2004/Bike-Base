@@ -1,6 +1,7 @@
 // src/pages/AboutUs.jsx
 export default function AboutUs() {
   return (
+
     <section className="min-h-screen bg-gradient-to-br from-[#0a0f1c] to-[#091621] text-white flex flex-col items-center py-12 px-6">
       {/* Title */}
       <h1 className="text-4xl font-extrabold mb-4 text-cyan-400">About Us</h1>

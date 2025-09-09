@@ -1,13 +1,21 @@
-// Bike Variant Component
-const BikeVariant = ({ color, active, onClick }) => {
+// Bike Variant Component (DaisyUI Luxury Theme)
+const BikeVariant = ({ color, name, active, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`w-10 h-10 rounded-full border-2 ${active ? 'border-white' : 'border-gray-500'} transition-all duration-300 flex items-center justify-center`}
+      className={`btn btn-circle btn-sm relative transition-all duration-300 ${
+        active
+          ? "ring-2 ring-primary ring-offset-2 ring-offset-base-100"
+          : "hover:ring-1 hover:ring-neutral"
+      }`}
       style={{ backgroundColor: color }}
-      aria-label={`Select ${color} variant`}
+      aria-label={`Select ${name} variant`}
     >
-      {active && <span className="text-white">✓</span>}
+      {active && (
+        <span className="absolute text-primary-content text-xs font-bold">
+          ✓
+        </span>
+      )}
     </button>
   );
 };

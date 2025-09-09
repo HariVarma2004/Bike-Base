@@ -1,49 +1,55 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import './index.css';
-import MotovexLanding from './components/MainComponent';
-import Footer from './components/footer/Footer'; // ✅ correct path
-import ContactUs from './components/contactUs/Contact';
-import AboutUs from './components/aboutUs/About';
-import ProfilePage from './components/ProfilePage/profile';
-import Navigation from './components/navigation/Navigation';
-import Home  from './components/home/Home';
+import "./index.css";
+import MotovexLanding from "./components/MainComponent";
+import Footer from "./components/footer/Footer";
+import ContactUs from "./components/contactUs/Contact";
+import AboutUs from "./components/aboutUs/About";
+import ProfilePage from "./components/ProfilePage/profile";
+import Navigation from "./components/navigation/Navigation";
+import Home from "./components/home/Home";
 
 function App() {
-  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-
   return (
-
-    <div data-theme= "luxury" className="min-h-screen flex flex-col bg-gradient-to-r from-slate-900 to-slate-800 text-white">
-      {/* Main Content */}
-
+    <div
+      data-theme="luxury"
+      className="min-h-screen flex flex-col bg-base-100 text-base-content"
+    >
       {/* Navigation */}
       <Navigation
         mobileMenuOpen={mobileMenuOpen}
         onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
       />
 
-      {/* Home Section */}  
-      <Home/>
+      {/* Hero / Home Section */}
+      <section id="home">
+        <Home />
+      </section>
 
-      <main className="flex-1">
+      {/* Main Showcase */}
+      <main id="showcase" className="flex-1">
         <MotovexLanding />
       </main>
 
       {/* About Us */}
-      <AboutUs/>
+      <section id="about">
+        <AboutUs />
+      </section>
 
       {/* Profile Page */}
-      <ProfilePage/>
+      <section id="profile">
+        <ProfilePage />
+      </section>
 
-      {/* ContactUs */}
-      <ContactUs/>
+      {/* Contact Us */}
+      <section id="contact">
+        <ContactUs />
+      </section>
 
       {/* Footer */}
       <Footer />
-
     </div>
   );
 }

@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-gray-900 overflow-hidden">
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-base-100 overflow-hidden">
       {/* Image Slider */}
       <div className="relative w-full h-screen">
         {images.map((img, index) => (
@@ -44,15 +44,15 @@ const Home = () => {
               onClick={() => setCurrentIndex(index)}
               className={`cursor-pointer transition-all duration-500 ${
                 currentIndex === index
-                  ? "bg-blue-600 h-2 w-16" // active: longer + sharp edges
-                  : "bg-gray-400 h-1 w-8"  // inactive: smaller bar
+                  ? "bg-primary h-2 w-16" // luxury theme → primary color (gold)
+                  : "bg-neutral h-1 w-8"  // inactive state
               }`}
             ></div>
           ))}
         </div>
 
         {/* Explore Button */}
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-2xl shadow-lg hover:bg-blue-700 transition">
+        <button className="btn btn-primary rounded-2xl shadow-lg">
           Explore Now
         </button>
       </div>

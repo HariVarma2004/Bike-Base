@@ -1,91 +1,88 @@
 // src/pages/Profile.jsx
+import { Award, Globe2, MapPin, Activity } from "lucide-react";
+
 export default function Profile() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-[#0a0f1c] to-[#091621] text-white py-12 px-6 flex flex-col items-center">
+    <section className="min-h-screen bg-base-100 text-base-content py-16 px-6 flex flex-col items-center">
       {/* Logo + Motive */}
-      <div className="text-center mb-12">
-        {/* Replace with your actual logo image */}
+      <div className="text-center mb-16">
         <img
           src="/logo.png"
           alt="BikeBase Logo"
-          className="mx-auto w-24 h-24 mb-4"
+          className="mx-auto w-24 h-24 mb-4 drop-shadow-lg"
         />
-        <h1 className="text-4xl font-extrabold text-cyan-400 mb-3">BikeBase</h1>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-3">
+          BikeBase
+        </h1>
+        <p className="text-base-content/70 max-w-2xl mx-auto leading-relaxed">
           Our motive is to unite bikers across the world with a platform that
-          blends <span className="text-cyan-300">bike garage</span>,{" "}
-          <span className="text-cyan-300">parts marketplace</span>, and a{" "}
-          <span className="text-cyan-300">community hub</span> where every rider
+          blends <span className="text-primary">bike garage</span>,{" "}
+          <span className="text-primary">parts marketplace</span>, and a{" "}
+          <span className="text-primary">community hub</span> where every rider
           can share, explore, and grow.
         </p>
       </div>
 
       {/* Bikers Blog */}
-      <div className="max-w-6xl w-full mb-16">
-        <h2 className="text-2xl font-semibold text-cyan-300 mb-6 text-center">
+      <div className="max-w-6xl w-full mb-20">
+        <h2 className="text-2xl font-semibold text-primary mb-8 text-center">
           Biker’s Blogs
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Blog Card 1 */}
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-lg hover:shadow-cyan-500/20 transition">
-            <h3 className="text-xl font-bold text-cyan-300 mb-2">
-              Riding Through the Ghats
-            </h3>
-            <p className="text-gray-300 mb-4">
-              An unforgettable road trip exploring the winding hills of Western
-              Ghats — pure freedom on two wheels.
-            </p>
-            <p className="text-sm text-gray-500">By Arjun, March 2025</p>
-          </div>
-
-          {/* Blog Card 2 */}
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-lg hover:shadow-cyan-500/20 transition">
-            <h3 className="text-xl font-bold text-cyan-300 mb-2">
-              Why I Switched to Electric
-            </h3>
-            <p className="text-gray-300 mb-4">
-              From fuel to battery — my experience of embracing electric bikes
-              and the thrill it brings.
-            </p>
-            <p className="text-sm text-gray-500">By Meera, April 2025</p>
-          </div>
-
-          {/* Blog Card 3 */}
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-lg hover:shadow-cyan-500/20 transition">
-            <h3 className="text-xl font-bold text-cyan-300 mb-2">
-              Biker Brotherhood
-            </h3>
-            <p className="text-gray-300 mb-4">
-              More than machines, it’s about friendships, trust, and stories
-              shared on every ride.
-            </p>
-            <p className="text-sm text-gray-500">By Rahul, May 2025</p>
-          </div>
+          {[
+            {
+              title: "Riding Through the Ghats",
+              desc: "An unforgettable road trip exploring the winding hills of Western Ghats — pure freedom on two wheels.",
+              author: "By Arjun, March 2025",
+            },
+            {
+              title: "Why I Switched to Electric",
+              desc: "From fuel to battery — my experience of embracing electric bikes and the thrill it brings.",
+              author: "By Meera, April 2025",
+            },
+            {
+              title: "Biker Brotherhood",
+              desc: "More than machines, it’s about friendships, trust, and stories shared on every ride.",
+              author: "By Rahul, May 2025",
+            },
+          ].map((blog, idx) => (
+            <div
+              key={idx}
+              className="card bg-base-200 shadow-lg border border-transparent hover:border-primary/40 hover:scale-[1.02] transition-all duration-300"
+            >
+              <div className="card-body">
+                <h3 className="card-title text-primary">{blog.title}</h3>
+                <p className="text-base-content/70">{blog.desc}</p>
+                <p className="text-sm text-base-content/50">{blog.author}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Rider Stats / Achievements */}
       <div className="max-w-5xl w-full text-center">
-        <h2 className="text-2xl font-semibold text-cyan-300 mb-6">
+        <h2 className="text-2xl font-semibold text-primary mb-8">
           Rider Achievements
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-md">
-            <h3 className="text-3xl font-bold text-cyan-400">120+</h3>
-            <p className="text-gray-300">Rides Completed</p>
-          </div>
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-md">
-            <h3 className="text-3xl font-bold text-cyan-400">50K km</h3>
-            <p className="text-gray-300">Total Distance</p>
-          </div>
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-md">
-            <h3 className="text-3xl font-bold text-cyan-400">15</h3>
-            <p className="text-gray-300">Countries Explored</p>
-          </div>
-          <div className="bg-[#0f1b2d] p-6 rounded-2xl shadow-md">
-            <h3 className="text-3xl font-bold text-cyan-400">10+</h3>
-            <p className="text-gray-300">Years Riding</p>
-          </div>
+          {[
+            { value: "120+", label: "Rides Completed", icon: Activity },
+            { value: "50K km", label: "Total Distance", icon: MapPin },
+            { value: "15", label: "Countries Explored", icon: Globe2 },
+            { value: "10+", label: "Years Riding", icon: Award },
+          ].map((stat, idx) => (
+            <div
+              key={idx}
+              className="card bg-base-200 shadow-md border border-base-300 hover:border-primary/40 hover:scale-[1.03] transition-all duration-300"
+            >
+              <div className="card-body items-center text-center">
+                <stat.icon className="mb-3 text-primary w-8 h-8" />
+                <h3 className="text-3xl font-bold text-primary">{stat.value}</h3>
+                <p className="text-base-content/70">{stat.label}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

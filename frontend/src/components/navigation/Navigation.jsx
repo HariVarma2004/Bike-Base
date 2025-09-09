@@ -1,35 +1,60 @@
+import { motion, AnimatePresence } from "framer-motion";
+
 const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
   return (
-    <nav className="relative z-20 px-4 md:px-6 py-4 flex justify-between items-center">
-      <div className="text-xl font-bold text-cyan-400">MOTOVEX</div>
-      
-      {/* Desktop Navigation */}
-      <div className="hidden md:flex space-x-8">
-        <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
-        <a href="#" className="text-gray-300 hover:text-white transition-colors">Models</a>
-        <a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a>
-        <a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a>
+    <nav className="navbar relative z-20 px-4 md:px-6 py-4">
+      {/* Logo */}
+      <div className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-wide">
+        MOTOVEX
       </div>
-      
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex gap-8 ml-auto">
+        {["Home", "Models", "Features", "Contact"].map((item) => (
+          <a
+            key={item}
+            href="#"
+            className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
+          >
+            {item}
+          </a>
+        ))}
+      </div>
+
       {/* Mobile Menu Button */}
-      <button 
-        className="md:hidden text-gray-300 focus:outline-none"
+      <button
+        className="btn btn-ghost btn-circle md:hidden text-xl"
         onClick={onToggleMobileMenu}
+        aria-label="Toggle Mobile Menu"
       >
-        {mobileMenuOpen ? '✕' : '☰'}
+        {mobileMenuOpen ? "✕" : "☰"}
       </button>
-      
+
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-gray-800 md:hidden">
-          <div className="flex flex-col space-y-4 p-4">
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Models</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25 }}
+            className="absolute top-full left-0 right-0 bg-base-200/95 border-t border-base-300 shadow-lg md:hidden"
+          >
+            <div className="menu menu-vertical p-4">
+              {["Home", "Models", "Features", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="link link-hover text-base-content/80 hover:text-primary font-medium"
+                  onClick={onToggleMobileMenu} // auto-close
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

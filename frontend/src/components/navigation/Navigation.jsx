@@ -5,10 +5,10 @@ const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
       
       {/* Desktop Navigation */}
       <div className="hidden md:flex space-x-8">
-        <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Home</a>
-        <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Models</a>
-        <a href="#" className="text-gray-300 hover:text-cyan-500 transition">Features</a>
-        <a href="contact.js" className="text-gray-300 hover:text-cyan-500 transition">Contact</a>
+        <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="#" className="text-gray-300 hover:text-white transition-colors">Models</a>
+        <a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a>
+        <a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a>
       </div>
       
       {/* Mobile Menu Button */}

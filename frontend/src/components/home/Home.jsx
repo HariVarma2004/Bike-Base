@@ -51,13 +51,13 @@ const Home = () => {
           onClick={prevSlide}
           className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70"
         >
-          ←
+          
         </button>
         <button
           onClick={nextSlide}
           className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70"
         >
-          →
+          
         </button>
       </div>
 

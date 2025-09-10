@@ -1,105 +1,145 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Search, User } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
+// --- import logo asset if you have one ---
+// import logoImg from "../assets/motovex-logo.png";
+
+const DEFAULT_SEARCH_PX = 300;
 
 const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
+  const [showSearch, setShowSearch] = useState(false);
+  const [maxSearchWidth, setMaxSearchWidth] = useState(0);
+
+  const headerRef = useRef(null);
+  const logoRef = useRef(null);
+  const centerRef = useRef(null);
+  const rightRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (showSearch) inputRef.current?.focus();
+  }, [showSearch]);
+
+  const measure = () => {
+    const logo = logoRef.current;
+    const center = centerRef.current;
+    const right = rightRef.current;
+    if (!logo || !right) return;
+
+    const logoRect = logo.getBoundingClientRect();
+    const centerRect = center?.getBoundingClientRect();
+    const rightRect = right.getBoundingClientRect();
+
+    const GAP = 12;
+    const centerRight = centerRect ? centerRect.right : logoRect.right + 16;
+    const leftBoundary = Math.max(logoRect.right, centerRight);
+
+    let available = rightRect.left - leftBoundary - GAP;
+    if (available < 0) available = 0;
+
+    setMaxSearchWidth(Math.min(DEFAULT_SEARCH_PX, Math.floor(available)));
+  };
+
+  useEffect(() => {
+    measure();
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [showSearch]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (showSearch && headerRef.current && !headerRef.current.contains(e.target)) {
+        setShowSearch(false);
+      }
+    };
+    const handleKey = (e) => {
+      if (e.key === "Escape") setShowSearch(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [showSearch]);
+
   return (
-    <nav className="navbar relative z-20 px-4 md:px-6 py-4">
-      {/* Logo */}
-      <div className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-wide">
-        MOTOVEX
-      </div>
+    <nav ref={headerRef} className="navbar bg-base-100 shadow-md px-6 py-3 relative z-20">
+      <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
+        {/* ✅ Left: Logo */}
+        <div ref={logoRef} className="flex items-center flex-shrink-0 min-w-[120px]">
+          {/* <img src={logoImg} alt="MOTOVEX" className="h-10 w-auto" /> */}
+          <span className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-wide">
+            MOTOVEX
+          </span>
+        </div>
 
-      {/* Desktop Navigation */}
-      <div className="hidden md:flex gap-8 ml-auto">
-        <Link
-          to="/"
-          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
+        {/* ✅ Center: Links */}
+        <div
+          ref={centerRef}
+          className="hidden md:flex gap-8 items-center absolute left-1/2 transform -translate-x-1/2"
         >
-          Home
-        </Link>
+          <Link to="/" className="btn btn-ghost normal-case text-lg">
+            Home
+          </Link>
+          <Link to="/about" className="btn btn-ghost normal-case text-lg">
+            About Us
+          </Link>
+          <Link to="/contact" className="btn btn-ghost normal-case text-lg">
+            Contact Us
+          </Link>
+        </div>
 
-        {/* Dummy Items */}
-        <span className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer">
-          Models
-        </span>
-        <span className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer">
-          Features
-        </span>
-
-        <Link
-          to="/about"
-          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
-        >
-          About Us
-        </Link>
-        <Link
-          to="/contact"
-          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
-        >
-          Contact
-        </Link>
-      </div>
-
-      {/* Mobile Menu Button */}
-      <button
-        className="btn btn-ghost btn-circle md:hidden text-xl"
-        onClick={onToggleMobileMenu}
-        aria-label="Toggle Mobile Menu"
-      >
-        {mobileMenuOpen ? "✕" : "☰"}
-      </button>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
+        {/* ✅ Right: Search + Icons */}
+        <div ref={rightRef} className="flex items-center gap-3 relative">
+          {/* Expanding Search Input */}
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.25 }}
-            className="absolute top-full left-0 right-0 bg-base-200/95 border-t border-base-300 shadow-lg md:hidden"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{
+              width: showSearch ? maxSearchWidth : 0,
+              opacity: showSearch ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
           >
-            <div className="menu menu-vertical p-4">
-              <Link
-                to="/"
-                className="link link-hover text-base-content/80 hover:text-primary font-medium"
-                onClick={onToggleMobileMenu}
-              >
-                Home
-              </Link>
-
-              {/* Dummy Items */}
-              <span
-                className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer"
-                onClick={onToggleMobileMenu}
-              >
-                Models
-              </span>
-              <span
-                className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer"
-                onClick={onToggleMobileMenu}
-              >
-                Features
-              </span>
-
-              <Link
-                to="/about"
-                className="link link-hover text-base-content/80 hover:text-primary font-medium"
-                onClick={onToggleMobileMenu}
-              >
-                About Us
-              </Link>
-              <Link
-                to="/contact"
-                className="link link-hover text-base-content/80 hover:text-primary font-medium"
-                onClick={onToggleMobileMenu}
-              >
-                Contact
-              </Link>
-            </div>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search..."
+              className="input input-bordered w-full max-w-xs"
+            />
           </motion.div>
-        )}
-      </AnimatePresence>
+
+          {/* Search Toggle */}
+          <button
+            aria-label="Toggle search"
+            className="btn btn-ghost btn-circle"
+            onClick={() => {
+              setShowSearch((s) => !s);
+              setTimeout(measure, 0);
+            }}
+          >
+            <Search size={22} />
+          </button>
+
+          {/* User Icon */}
+          <button className="btn btn-ghost btn-circle">
+            <User size={22} />
+          </button>
+
+          {/* Mobile Menu */}
+          <button
+            className="btn btn-ghost btn-circle md:hidden"
+            onClick={onToggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
     </nav>
   );
 };

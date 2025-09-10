@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import "./index.css";
 import MotovexLanding from "./components/MainComponent";
@@ -23,32 +24,38 @@ function App() {
         onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
       />
 
-      {/* Hero / Home Section */}
-      <section id="home">
-        <Home />
-      </section>
+      {/* Page Routes */}
+      <main className="flex-1">
+        <Routes>
+          {/* Home Page */}
+          <Route
+            path="/"
+            element={
+              <>
+                <section id="home">
+                  <Home />
+                </section>
 
-      {/* Main Showcase */}
-      <main id="showcase" className="flex-1">
-        <MotovexLanding />
+                <main id="showcase">
+                  <MotovexLanding />
+                </main>
+
+                <section id="profile">
+                  <ProfilePage />
+                </section>
+              </>
+            }
+          />
+
+          {/* About Us Page */}
+          <Route path="/about" element={<AboutUs />} />
+
+          {/* Contact Us Page */}
+          <Route path="/contact" element={<ContactUs />} />
+        </Routes>
       </main>
 
-      {/* About Us */}
-      <section id="about">
-        <AboutUs />
-      </section>
-
-      {/* Profile Page */}
-      <section id="profile">
-        <ProfilePage />
-      </section>
-
-      {/* Contact Us */}
-      <section id="contact">
-        <ContactUs />
-      </section>
-
-      {/* Footer */}
+      {/* Footer (always visible) */}
       <Footer />
     </div>
   );

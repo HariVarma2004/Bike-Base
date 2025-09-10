@@ -1,4 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
   return (
@@ -10,15 +11,33 @@ const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex gap-8 ml-auto">
-        {["Home", "Models", "Features", "Contact"].map((item) => (
-          <a
-            key={item}
-            href="#"
-            className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
-          >
-            {item}
-          </a>
-        ))}
+        <Link
+          to="/"
+          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
+        >
+          Home
+        </Link>
+
+        {/* Dummy Items */}
+        <span className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer">
+          Models
+        </span>
+        <span className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer">
+          Features
+        </span>
+
+        <Link
+          to="/about"
+          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
+        >
+          About Us
+        </Link>
+        <Link
+          to="/contact"
+          className="link link-hover text-base-content/80 hover:text-primary font-medium transition-colors"
+        >
+          Contact
+        </Link>
       </div>
 
       {/* Mobile Menu Button */}
@@ -41,16 +60,42 @@ const Navigation = ({ mobileMenuOpen, onToggleMobileMenu }) => {
             className="absolute top-full left-0 right-0 bg-base-200/95 border-t border-base-300 shadow-lg md:hidden"
           >
             <div className="menu menu-vertical p-4">
-              {["Home", "Models", "Features", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="link link-hover text-base-content/80 hover:text-primary font-medium"
-                  onClick={onToggleMobileMenu} // auto-close
-                >
-                  {item}
-                </a>
-              ))}
+              <Link
+                to="/"
+                className="link link-hover text-base-content/80 hover:text-primary font-medium"
+                onClick={onToggleMobileMenu}
+              >
+                Home
+              </Link>
+
+              {/* Dummy Items */}
+              <span
+                className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer"
+                onClick={onToggleMobileMenu}
+              >
+                Models
+              </span>
+              <span
+                className="link link-hover text-base-content/80 hover:text-primary font-medium cursor-pointer"
+                onClick={onToggleMobileMenu}
+              >
+                Features
+              </span>
+
+              <Link
+                to="/about"
+                className="link link-hover text-base-content/80 hover:text-primary font-medium"
+                onClick={onToggleMobileMenu}
+              >
+                About Us
+              </Link>
+              <Link
+                to="/contact"
+                className="link link-hover text-base-content/80 hover:text-primary font-medium"
+                onClick={onToggleMobileMenu}
+              >
+                Contact
+              </Link>
             </div>
           </motion.div>
         )}

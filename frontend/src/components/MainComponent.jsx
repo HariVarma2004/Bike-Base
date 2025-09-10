@@ -4,8 +4,8 @@ import StatCard from "./ui/StatCard.jsx";
 import MobileLayout from "./layout/MobileLayout.jsx";
 import DesktopLayout from "./layout/DesktopLayout.jsx";
 
-// Main Component
-const MainComponent = () => {
+// Main Component - Now accepts bike prop
+const MainComponent = ({ bike }) => {
   return (
     <div className="min-h-screen bg-base-100 text-base-content relative overflow-hidden">
       {/* Background Pattern */}
@@ -17,14 +17,14 @@ const MainComponent = () => {
 
       {/* Main Content */}
       <div className="relative z-10 px-4 md:px-6 py-6 md:py-12">
-        {/* Mobile Layout */}
+        {/* Mobile Layout - Pass bike prop */}
         <div className="md:hidden">
-          <MobileLayout />
+          <MobileLayout bike={bike} />
         </div>
 
-        {/* Desktop Layout */}
+        {/* Desktop Layout - Pass bike prop */}
         <div className="hidden md:block">
-          <DesktopLayout />
+          <DesktopLayout bike={bike} />
         </div>
       </div>
 

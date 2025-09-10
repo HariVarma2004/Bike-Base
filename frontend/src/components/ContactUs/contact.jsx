@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function ContactUs() {
   return (
-    <section className="min-h-screen bg-base-200 text-base-content flex flex-col items-center py-12 px-6">
+    <section data-theme= "forest" className="min-h-screen bg-base-200 text-base-content flex flex-col items-center py-12 px-6">
       {/* Title */}
       <h1 className="text-4xl font-extrabold mb-4 text-primary">Contact Us</h1>
       <p className="text-base-content/70 mb-12 text-center max-w-xl">

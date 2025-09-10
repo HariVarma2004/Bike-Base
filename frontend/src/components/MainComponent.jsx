@@ -12,8 +12,6 @@ const MainComponent = ({ bike }) => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,theme(colors.primary/10),transparent_70%)]"></div>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,theme(colors.primary/5)_50%,transparent_100%)]"></div>
 
-      {/* Navigation */}
-      <Navigation />
 
       {/* Main Content */}
       <div className="relative z-10 px-4 md:px-6 py-6 md:py-12">

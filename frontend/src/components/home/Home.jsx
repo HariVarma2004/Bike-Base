@@ -5,10 +5,21 @@ import Hero7 from "../../assets/Hero7.jpg";
 import Hero8 from "../../assets/Hero8.jpg";
 import Hero9 from "../../assets/Hero9.jpg";
 
-const images = [Hero9, Hero5, Hero6, Hero7, Hero8];
+// Import your 5 portrait images for mobile (replace with your actual imports)
+import Heromob1 from "../../assets/Heromob1.jpg";
+import Heromob2 from "../../assets/Heromob2.jpg";
+import Heromob3 from "../../assets/Heromob3.jpg";
+import Heromob4 from "../../assets/Heromob4.jpg";
+import Heromob5 from "../../assets/Heromob5.jpg";
+
+// Landscape images for desktop/tablet
+const desktopImages = [Hero9, Hero5, Hero6, Hero7, Hero8];
+
+// Portrait images for mobile devices
+const mobileImages = [Heromob1, Heromob2, Heromob3, Heromob4, Heromob5];
 
 // Custom object positions for each image to ensure optimal cropping on all devices
-const imagePositions = [
+const desktopImagePositions = [
   "center",  // for Hero9
   "center",  // for Hero5
   "center",  // for Hero6
@@ -16,39 +27,58 @@ const imagePositions = [
   "center",  // for Hero8
 ];
 
+// Custom positions for mobile images if needed
+const mobileImagePositions = [
+  "center",  // for MobileHero1
+  "center",  // for MobileHero2
+  "center",  // for MobileHero3
+  "center",  // for MobileHero4
+  "center",  // for MobileHero5
+];
+
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Handle window resize for responsive adjustments
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      
+      // Reset index when switching between mobile and desktop to prevent issues
+      if (mobile !== isMobile) {
+        setCurrentIndex(0);
+      }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [isMobile]);
 
   // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000); // Increased to 5s for better user experience
+      setCurrentIndex((prev) => (prev + 1) % (isMobile ? mobileImages.length : desktopImages.length));
+    }, 5000); // 5 seconds per slide
     
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   // Go to specific slide
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
 
+  // Get current images and positions based on device
+  const currentImages = isMobile ? mobileImages : desktopImages;
+  const currentPositions = isMobile ? mobileImagePositions : desktopImagePositions;
+
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-base-100 overflow-hidden">
       {/* Image Slider */}
       <div className="relative w-full h-screen">
-        {images.map((img, index) => (
+        {currentImages.map((img, index) => (
           <div
             key={index}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
@@ -59,10 +89,10 @@ const Home = () => {
             <div className="w-full h-full flex items-center justify-center overflow-hidden">
               <img
                 src={img}
-                alt={`Slide ${index}`}
+                alt={`Slide ${index + 1}`}
                 className="w-full h-full object-cover"
                 style={{ 
-                  objectPosition: imagePositions[index] || "center",
+                  objectPosition: currentPositions[index] || "center",
                 }}
                 loading={index === 0 ? "eager" : "lazy"} // Only first image loads eagerly
               />
@@ -101,7 +131,7 @@ const Home = () => {
       <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 flex flex-col items-center w-full z-20 px-4">
         {/* Sharp Line Indicators */}
         <div className="flex mb-4 sm:mb-6 space-x-2 sm:space-x-3">
-          {images.map((_, index) => (
+          {currentImages.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}

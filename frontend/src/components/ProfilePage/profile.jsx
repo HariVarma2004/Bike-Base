@@ -1,24 +1,36 @@
 // src/pages/Profile.jsx
 import { Award, Globe2, MapPin, Activity } from "lucide-react";
 
+// Import your logo directly (adjust the path as needed)
+import Logo from "../../assets/Logo.png";
+
 export default function Profile() {
   return (
     <section className="min-h-screen bg-base-100 text-base-content py-16 px-6 flex flex-col items-center">
       {/* Logo + Motive */}
       <div className="text-center mb-16">
         <img
-          src="/logo.png"
+          src={Logo} // Use the imported logo
           alt="BikeBase Logo"
-          className="mx-auto w-24 h-24 mb-4 drop-shadow-lg"
+          className="mx-auto w-24 h-24 mb-4 drop-shadow-lg object-contain"
+          onError={(e) => {
+            // Fallback if image fails to load
+            e.target.style.display = 'none';
+            e.target.nextSibling?.classList.remove('hidden');
+          }}
         />
+        {/* Fallback text logo */}
+        <div className="hidden mx-auto mb-4 text-5xl font-bold text-primary">
+          BB
+        </div>
         <h1 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-3">
           BikeBase
         </h1>
         <p className="text-base-content/70 max-w-2xl mx-auto leading-relaxed">
           Our motive is to unite bikers across the world with a platform that
-          blends <span className="text-primary">bike garage</span>,{" "}
-          <span className="text-primary">parts marketplace</span>, and a{" "}
-          <span className="text-primary">community hub</span> where every rider
+          blends <span className="text-primary font-medium">bike garage</span>,{" "}
+          <span className="text-primary font-medium">parts marketplace</span>, and a{" "}
+          <span className="text-primary font-medium">community hub</span> where every rider
           can share, explore, and grow.
         </p>
       </div>
@@ -26,7 +38,7 @@ export default function Profile() {
       {/* Bikers Blog */}
       <div className="max-w-6xl w-full mb-20">
         <h2 className="text-2xl font-semibold text-primary mb-8 text-center">
-          Biker’s Blogs
+          Biker's Blogs
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
@@ -42,7 +54,7 @@ export default function Profile() {
             },
             {
               title: "Biker Brotherhood",
-              desc: "More than machines, it’s about friendships, trust, and stories shared on every ride.",
+              desc: "More than machines, it's about friendships, trust, and stories shared on every ride.",
               author: "By Rahul, May 2025",
             },
           ].map((blog, idx) => (
@@ -53,7 +65,7 @@ export default function Profile() {
               <div className="card-body">
                 <h3 className="card-title text-primary">{blog.title}</h3>
                 <p className="text-base-content/70">{blog.desc}</p>
-                <p className="text-sm text-base-content/50">{blog.author}</p>
+                <p className="text-sm text-base-content/50 mt-2">{blog.author}</p>
               </div>
             </div>
           ))}

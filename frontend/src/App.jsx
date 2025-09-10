@@ -28,7 +28,7 @@ function App() {
         <Routes>
           {/* Home Page */}
           <Route
-            path="/"
+            path="*"
             element={
               <>
                 <section id="home">

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "./index.css";
 import MotovexLanding from "./components/MainComponent";
 import Footer from "./components/footer/Footer";
 import ContactUs from "./components/contactUs/Contact";
@@ -15,7 +14,7 @@ function App() {
 
   return (
     <div
-      data-theme="luxury"
+      data-theme="forest"
       className="min-h-screen flex flex-col bg-base-100 text-base-content"
     >
       {/* Navigation */}

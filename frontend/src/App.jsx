@@ -46,9 +46,9 @@ function App() {
       </main> */}
 
       {/* Add BikeSpecs section and pass bike prop */}
-      <section id="specifications">
+      {/* <section id="specifications">
         <BikeSpecs bike={activeBike} />
-      </section>
+      </section> */}
 
       <section id="profile">
         <ProfilePage />

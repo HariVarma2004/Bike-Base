@@ -55,7 +55,7 @@ export async function createBike(req, res) {
 
 export async function updateBike(req, res) {
     try {
-        const updateBike = await Bike.findByIdAndUpdate(req.params.id , req.body , { new: true });
+        const updatedBike = await Bike.findByIdAndUpdate(req.params.id , req.body , { new: true });
         if(!updateBike){
             res.status(404).json({ message: "Bike not found" , id: req.params.id });
             console.log("Bike not found with id: ", req.params.id);

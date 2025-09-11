@@ -36,7 +36,7 @@ export default function AddBikes() {
     setBike({ ...bike, [name]: type === "checkbox" ? checked : value });
   };
 
-  // ✅ handle numbers only
+  // ✅ only allow digits
   const handleNumberChange = (e) => {
     const { name, value } = e.target;
     if (/^\d*$/.test(value)) {
@@ -62,7 +62,7 @@ export default function AddBikes() {
     e.preventDefault();
     setLoading(true);
 
-    // Convert number fields to numbers before sending
+    // convert numbers
     const payload = {
       ...bike,
       year: Number(bike.year),
@@ -120,21 +120,24 @@ export default function AddBikes() {
   };
 
   return (
-    <div>
-      <div className="hero rounded-xl shadow-xl mb-6">
-        <div className="hero-content text-center text-white">
+    <div data-theme="forest" className="min-h-screen p-6">
+      {/* Header */}
+      <div className="hero rounded-xl shadow-xl mb-6 bg-base-200">
+        <div className="hero-content text-center">
           <div>
-            <h2 className="text-3xl font-bold">➕ Add New Bike</h2>
+            <h2 className="text-3xl font-bold text-primary">➕ Add New Bike</h2>
             <p className="opacity-80">Fill out the details below</p>
           </div>
         </div>
       </div>
 
+      {/* Form */}
       <div className="card bg-base-100 shadow-xl p-6">
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
+          {/* Dynamic Fields */}
           {[
             { label: "Brand", name: "brand", type: "text" },
             { label: "Name", name: "name", type: "text" },
@@ -158,16 +161,17 @@ export default function AddBikes() {
           ].map((field) => (
             <label key={field.name} className="form-control w-full">
               <div className="label">
-                <span className="label-text">{field.label}</span>
+                <span className="label-text font-semibold">{field.label}</span>
               </div>
               <input
-                type="text" // ✅ always text for custom validation
+                type="text" // always text, validate manually
                 name={field.name}
                 value={bike[field.name]}
                 onChange={
                   field.type === "number" ? handleNumberChange : handleChange
                 }
                 className="input input-bordered w-full"
+                placeholder={`Enter ${field.label}`}
                 required
               />
             </label>
@@ -177,7 +181,7 @@ export default function AddBikes() {
           <div className="md:col-span-2">
             <label className="form-control w-full">
               <div className="label">
-                <span className="label-text">Color Options</span>
+                <span className="label-text font-semibold">Color Options</span>
               </div>
               <div className="flex gap-2">
                 <input
@@ -212,20 +216,21 @@ export default function AddBikes() {
           {/* Description */}
           <label className="form-control md:col-span-2">
             <div className="label">
-              <span className="label-text">Description</span>
+              <span className="label-text font-semibold">Description</span>
             </div>
             <textarea
               name="description"
               value={bike.description}
               onChange={handleChange}
               className="textarea textarea-bordered w-full"
+              placeholder="Write a short description..."
               required
             />
           </label>
 
           {/* Available Toggle */}
           <label className="form-control md:col-span-2 flex items-center gap-4">
-            <span className="label-text">Available</span>
+            <span className="label-text font-semibold">Available</span>
             <input
               type="checkbox"
               name="available"
@@ -235,6 +240,7 @@ export default function AddBikes() {
             />
           </label>
 
+          {/* Submit Button */}
           <div className="md:col-span-2 flex justify-end mt-4">
             <button
               type="submit"

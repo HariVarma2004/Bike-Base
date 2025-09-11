@@ -39,9 +39,6 @@ function App() {
         <Home />
       </section>
 
-<<<<<<< HEAD
-      <section id="specifications">
-=======
       {/* Pass bike prop to MotovexLanding
       <main id="showcase">
         <MotovexLanding bike={activeBike} />
@@ -49,7 +46,6 @@ function App() {
 
       {/* Add BikeSpecs section and pass bike prop */}
       {/* <section id="specifications">
->>>>>>> c0f2b07918568fe136ceb6fafe113c2be1e577ab
         <BikeSpecs bike={activeBike} />
       </section> */}
 

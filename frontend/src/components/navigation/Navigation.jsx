@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,6 +11,7 @@ const Navigation = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [maxSearchWidth, setMaxSearchWidth] = useState(0);
+  const navigate = useNavigate();
 
   const headerRef = useRef(null);
   const logoRef = useRef(null);
@@ -132,10 +133,10 @@ const Navigation = () => {
               <Search size={22} />
             </button>
 
-            {/* User Icon */}
-            <button className="btn btn-ghost btn-circle">
+            {/* User Icon - Now routes to Login */}
+            <Link to="/login" className="btn btn-ghost btn-circle">
               <User size={22} />
-            </button>
+            </Link>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -183,6 +184,12 @@ const Navigation = () => {
               <li>
                 <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                   Contact Us
+                </Link>
+              </li>
+              {/* Add Login to mobile menu */}
+              <li>
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                  Login
                 </Link>
               </li>
             </ul>

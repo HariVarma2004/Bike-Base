@@ -1,4 +1,4 @@
-// src/components/Login.jsx (updated)
+// src/components/Login.jsx (updated with proper alignment)
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -49,87 +49,92 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-900 to-blue-900 p-4">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">BikeBase</h1>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
-        </div>
-        
-        {error && (
-          <div className="bg-red-50 text-red-700 p-3 rounded-lg mb-6">
-            {error}
-          </div>
-        )}
-        
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-              placeholder="Enter your email"
-              required
-            />
+    <div className="min-h-screen flex items-center justify-center bg-base-200 p-4" data-theme="forest">
+      <div className="card w-full max-w-md shadow-2xl bg-base-100">
+        <div className="card-body p-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-primary">BikeBase</h1>
+            <p className="text-base-content mt-2">Sign in to your account</p>
           </div>
           
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <div className="relative">
+          {error && (
+            <div className="alert alert-error mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{error}</span>
+            </div>
+          )}
+          
+          <form onSubmit={handleLogin} className="flex flex-col gap-5">
+            {/* Email Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-base-content">
+                Email Address
+              </label>
               <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
-                placeholder="Enter your password"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input input-bordered w-full h-12 px-4"
+                placeholder="Enter your email"
                 required
               />
+            </div>
+            
+            {/* Password Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-base-content">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input input-bordered w-full h-12 px-4 pr-10"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-base-content/70 hover:text-base-content"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              <div className="flex justify-end mt-1">
+                <a href="#" className="text-sm link link-hover text-base-content/70">
+                  Forgot password?
+                </a>
+              </div>
+            </div>
+            
+            {/* Submit Button */}
+            <div className="mt-4">
               <button
-                type="button"
-                className="absolute right-3 top-3.5 text-gray-500"
-                onClick={() => setShowPassword(!showPassword)}
+                type="submit"
+                disabled={isLoading}
+                className={`btn btn-primary w-full h-12 text-lg ${isLoading ? 'loading' : ''}`}
               >
-                {showPassword ? (
-                  <EyeSlashIcon className="h-5 w-5" />
-                ) : (
-                  <EyeIcon className="h-5 w-5" />
-                )}
+                {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
-          </div>
+          </form>
           
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-cyan-600 text-white py-3 px-4 rounded-lg hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition disabled:opacity-50"
-          >
-            {isLoading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Signing in...
-              </span>
-            ) : "Sign in"}
-          </button>
-        </form>
-        
-        <div className="mt-6 text-center">
-          <p className="text-gray-600">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-cyan-600 hover:text-cyan-700 font-medium">
-              Sign up
-            </Link>
-          </p>
+          <div className="text-center mt-6 pt-5 border-t border-base-300">
+            <p className="text-base-content">
+              Don't have an account?{" "}
+              <Link to="/register" className="link link-primary font-medium">
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import UserDashboard from "./components/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard";
 
 import "./index.css";
+import EditBike from "./components/admin/EditBike.jsx";
 
 // Simple ProtectedRoute component
 const ProtectedRoute = ({ children, role = "user" }) => {
@@ -107,6 +108,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/admin" element={<AdminLayout />} />
         <Route path="/admin/add-bike" element={<AddBike />} />
         <Route path="/admin/all-bikes" element={<AllBikes />} />
+        <Route path="/admin/edit-bike/:id" element={<EditBike />} />
         <Route path="/admin/users" element={<Users />} />
 
         {/* 404 */}

@@ -7,7 +7,6 @@ import DukeImage from "./assets/Duke390.webp";
 import AboutSite from "./components/AboutUs/AboutSite";
 
 function App() {
-  // Add bike state with all required properties
   const [activeBike] = useState({
     id: 1,
     brand: "KTM",
@@ -35,17 +34,11 @@ function App() {
   });
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-100">
       <section id="home">
         <Home />
       </section>
 
-      {/* Pass bike prop to MotovexLanding
-      <main id="showcase">
-        <MotovexLanding bike={activeBike} />
-      </main> */}
-
-      {/* Add BikeSpecs section and pass bike prop */}
       <section id="specifications">
         <BikeSpecs bike={activeBike} />
       </section>
@@ -57,7 +50,7 @@ function App() {
       <section id="aboutSite">
         <AboutSite />
       </section>
-    </>
+    </div>
   );
 }
 

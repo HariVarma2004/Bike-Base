@@ -4,19 +4,36 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App.jsx";
 import MainLayout from "./components/layout/MainLayout.jsx";
-
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AddBike from "./components/admin/AddBike.jsx";
 import AllBikes from "./components/admin/AllBikes.jsx";
 import Users from "./components/admin/Users.jsx";
-// import Settings from "./components/admin/Settings.jsx"
-
 import Explore from "./components/Explore/explore.jsx";
 import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
 import ContactUs from "./components/contactUs/Contact.jsx";
 import AboutUs from "./components/aboutUs/About.jsx";
+import Login from "./components/login/Login";
+import Register from "./components/Register";
+import UserDashboard from "./components/UserDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 import "./index.css";
+
+// Simple ProtectedRoute component
+const ProtectedRoute = ({ children, role = "user" }) => {
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const userRole = localStorage.getItem("userRole");
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  if (role && userRole !== role) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return children;
+};
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -55,13 +72,34 @@ createRoot(document.getElementById("root")).render(
             </MainLayout>
           }
         />
-
         <Route
           path="/explore/bikespecs/:id"
           element={
             <MainLayout>
               <BikeSpecs />
             </MainLayout>
+          }
+        />
+        
+        {/* Auth Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
+        {/* Protected Routes */}
+        <Route
+          path="/user-dashboard"
+          element={
+            <ProtectedRoute role="user">
+              <UserDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
           }
         />
 

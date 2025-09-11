@@ -60,7 +60,6 @@ export async function updateBike(req, res) {
             res.status(404).json({ message: "Bike not found" , id: req.params.id });
             console.log("Bike not found with id: ", req.params.id);
         }
-        const updatedBike = await updateBike.save();
         res.status(200).json(updatedBike);
         console.log("Updated bike successfully : ", updatedBike);
     } catch (error) {

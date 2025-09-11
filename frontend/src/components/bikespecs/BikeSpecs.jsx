@@ -17,7 +17,7 @@ const BikeSpecs = ({ bike }) => {
               if (fallback) fallback.style.display = 'flex';
             }}
           />
-          <div id="image-fallback" className="hidden absolute inset-0 bg-base-100 flex items-center justify-center">
+          <div id="image-fallback" className="hidden absolute inset-0 bg-base-100 items-center justify-center">
             <span className="text-2xl text-base-content/60">Bike Image Not Available</span>
           </div>
         </div>

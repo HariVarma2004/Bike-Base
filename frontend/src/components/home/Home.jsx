@@ -106,10 +106,14 @@ const Home = () => {
 
       {/* Content Container */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-        {/* Main Heading */}
-        <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-4 sm:mb-6 tracking-wide px-2 leading-tight">
-          Luxury Motorcycle Experience
+        <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-bold text-[#1fb854] mb-2 sm:mb-3 tracking-wide leading-tight drop-shadow-lg">
+          MOTOVEX
         </h1>
+        
+        {/* Subtitle */}
+        <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-semibold text-white/90 mb-4 sm:mb-6 tracking-wider uppercase">
+          Luxury Motorcycle Experience
+        </h2>
         
         {/* Subheading */}
         <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-xs xs:max-w-sm sm:max-w-lg md:max-w-2xl mb-6 sm:mb-8 md:mb-12 px-2 leading-relaxed">

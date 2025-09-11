@@ -4,6 +4,7 @@ import ProfilePage from "./components/ProfilePage/profile";
 import Home from "./components/home/Home";
 import BikeSpecs from "./components/bikespecs/BikeSpecs";
 import DukeImage from "./assets/Duke390.webp";
+import AboutSite from "./components/AboutUs/AboutSite";
 
 function App() {
   // Add bike state with all required properties
@@ -50,6 +51,10 @@ function App() {
 
       <section id="profile">
         <ProfilePage />
+      </section>
+
+      <section id="aboutSite">
+        <AboutSite />
       </section>
     </>
   );

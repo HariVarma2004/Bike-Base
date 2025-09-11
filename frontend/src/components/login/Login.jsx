@@ -1,8 +1,11 @@
-// src/components/Login.jsx (updated with proper alignment)
+// src/components/Login.jsx (improved version)
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+
+// Use environment variable for API base URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,35 +17,49 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    
     setIsLoading(true);
     setError("");
     
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
         password,
       });
 
       const { token, role, name } = res.data;
+      
+      // Store authentication data
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
       localStorage.setItem("userName", name);
+      localStorage.setItem("isAuthenticated", "true");
 
       // Redirect based on role
       if (role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/admin-dashboard", { replace: true });
       } else {
-        navigate("/user-dashboard");
+        navigate("/user-dashboard", { replace: true });
       }
     } catch (err) {
-      // Handle different error scenarios
-      if (err.response) {
-        setError(err.response.data.error || "Login failed. Please check your credentials.");
+      // Enhanced error handling with user-friendly messages
+      if (err.response?.status === 400) {
+        setError("Invalid email or password. Please try again.");
+      } else if (err.response?.status === 500) {
+        setError("Server error. Please try again later.");
       } else if (err.request) {
-        setError("Cannot connect to server. Please try again later.");
+        setError("Cannot connect to the server. Please check your connection.");
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
+      
+      console.error("Login error:", err);
     } finally {
       setIsLoading(false);
     }
@@ -68,38 +85,41 @@ export default function Login() {
           
           <form onSubmit={handleLogin} className="flex flex-col gap-5">
             {/* Email Field */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-base-content">
-                Email Address
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Email Address</span>
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full h-12 px-4"
+                className="input input-bordered input-primary"
                 placeholder="Enter your email"
                 required
+                disabled={isLoading}
               />
             </div>
             
             {/* Password Field */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-base-content">
-                Password
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-base-content">Password</span>
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input input-bordered w-full h-12 px-4 pr-10"
+                  className="input input-bordered input-primary w-full pr-10"
                   placeholder="Enter your password"
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-base-content/70 hover:text-base-content"
+                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={isLoading}
                 >
                   {showPassword ? (
                     <EyeSlashIcon className="h-5 w-5" />
@@ -108,19 +128,19 @@ export default function Login() {
                   )}
                 </button>
               </div>
-              <div className="flex justify-end mt-1">
-                <a href="#" className="text-sm link link-hover text-base-content/70">
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
                   Forgot password?
                 </a>
-              </div>
+              </label>
             </div>
             
             {/* Submit Button */}
-            <div className="mt-4">
+            <div className="form-control mt-2">
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`btn btn-primary w-full h-12 text-lg ${isLoading ? 'loading' : ''}`}
+                className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
               >
                 {isLoading ? "Signing in..." : "Sign in"}
               </button>

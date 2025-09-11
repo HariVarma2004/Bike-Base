@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+// components/admin/AddBikes.jsx
+import React, { useState } from "react";
 
-
-
-// ================= Add Bike Page =================
 export default function AddBikes() {
   const [bike, setBike] = useState({
     brand: "",
@@ -25,24 +23,30 @@ export default function AddBikes() {
     weight: "",
     seatHeight: "",
     fuelCapacity: "",
-    colorOption: [],
+    colorOptions: [],
     available: false,
   });
 
   const [colorInput, setColorInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  // handle text / checkbox
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setBike({ ...bike, [name]: type === "checkbox" ? checked : value });
   };
 
+  // ✅ handle numbers only
   const handleNumberChange = (e) => {
-    if (/[eE+\-]/.test(e.key)) e.preventDefault();
+    const { name, value } = e.target;
+    if (/^\d*$/.test(value)) {
+      setBike({ ...bike, [name]: value });
+    }
   };
 
   const handleAddColor = () => {
-    if (colorInput.trim() && !bike.colorOption.includes(colorInput)) {
-      setBike({ ...bike, colorOption: [...bike.colorOption, colorInput] });
+    if (colorInput.trim() && !bike.colorOptions.includes(colorInput)) {
+      setBike({ ...bike, colorOptions: [...bike.colorOptions, colorInput] });
       setColorInput("");
     }
   };
@@ -50,18 +54,73 @@ export default function AddBikes() {
   const handleRemoveColor = (color) => {
     setBike({
       ...bike,
-      colorOption: bike.colorOption.filter((c) => c !== color),
+      colorOptions: bike.colorOptions.filter((c) => c !== color),
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting Bike Data:", bike);
+    setLoading(true);
+
+    // Convert number fields to numbers before sending
+    const payload = {
+      ...bike,
+      year: Number(bike.year),
+      price: Number(bike.price),
+      milage: Number(bike.milage),
+      engineCapacity: Number(bike.engineCapacity),
+      topSpeed: Number(bike.topSpeed),
+      power: Number(bike.power),
+      torque: Number(bike.torque),
+      weight: Number(bike.weight),
+      seatHeight: Number(bike.seatHeight),
+      fuelCapacity: Number(bike.fuelCapacity),
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/bikes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to add bike");
+
+      alert("✅ Bike added successfully!");
+      setBike({
+        brand: "",
+        name: "",
+        model: "",
+        year: "",
+        price: "",
+        image: "",
+        description: "",
+        milage: "",
+        engineCapacity: "",
+        topSpeed: "",
+        power: "",
+        torque: "",
+        fuelType: "",
+        transmission: "",
+        brakes: "",
+        tires: "",
+        suspension: "",
+        weight: "",
+        seatHeight: "",
+        fuelCapacity: "",
+        colorOptions: [],
+        available: false,
+      });
+    } catch (error) {
+      console.error("Error adding bike:", error);
+      alert("❌ Failed to add bike. Check console.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      {/* Header */}
       <div className="hero rounded-xl shadow-xl mb-6">
         <div className="hero-content text-center text-white">
           <div>
@@ -71,7 +130,6 @@ export default function AddBikes() {
         </div>
       </div>
 
-      {/* Form */}
       <div className="card bg-base-100 shadow-xl p-6">
         <form
           onSubmit={handleSubmit}
@@ -103,11 +161,12 @@ export default function AddBikes() {
                 <span className="label-text">{field.label}</span>
               </div>
               <input
-                type={field.type}
+                type="text" // ✅ always text for custom validation
                 name={field.name}
                 value={bike[field.name]}
-                onChange={handleChange}
-                onKeyDown={field.type === "number" ? handleNumberChange : null}
+                onChange={
+                  field.type === "number" ? handleNumberChange : handleChange
+                }
                 className="input input-bordered w-full"
                 required
               />
@@ -138,7 +197,7 @@ export default function AddBikes() {
               </div>
             </label>
             <div className="mt-2 flex flex-wrap gap-2">
-              {bike.colorOption.map((color, i) => (
+              {bike.colorOptions.map((color, i) => (
                 <div
                   key={i}
                   className="badge badge-primary gap-2 p-3 cursor-pointer"
@@ -160,6 +219,7 @@ export default function AddBikes() {
               value={bike.description}
               onChange={handleChange}
               className="textarea textarea-bordered w-full"
+              required
             />
           </label>
 
@@ -175,10 +235,13 @@ export default function AddBikes() {
             />
           </label>
 
-          {/* Submit */}
           <div className="md:col-span-2 flex justify-end mt-4">
-            <button type="submit" className="btn btn-primary">
-              💾 Save Bike
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
+              {loading ? "⏳ Saving..." : "💾 Save Bike"}
             </button>
           </div>
         </form>
@@ -186,5 +249,3 @@ export default function AddBikes() {
     </div>
   );
 }
-
-

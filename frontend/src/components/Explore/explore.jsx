@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // Sample bike data (replace with API later)
 const bikes = [
@@ -23,21 +25,21 @@ const bikes = [
     image:
       "https://imgd.aeplcdn.com/370x208/n/cw/ec/123859/hunter-350-right-side-view-2.png",
   },
-    {
+  {
     id: 4,
     name: "Royal Enfield Hunter 350",
     price: "₹1,50,000",
     image:
       "https://imgd.aeplcdn.com/370x208/n/cw/ec/123859/hunter-350-right-side-view-2.png",
   },
-    {
+  {
     id: 5,
     name: "Royal Enfield Hunter 350",
     price: "₹1,50,000",
     image:
       "https://imgd.aeplcdn.com/370x208/n/cw/ec/123859/hunter-350-right-side-view-2.png",
   },
-    {
+  {
     id: 6,
     name: "Royal Enfield Hunter 350",
     price: "₹1,50,000",
@@ -107,22 +109,29 @@ const BrandCard = ({ name, logo }) => (
 );
 
 // Bike Card Component
-const BikeCard = ({ name, price, image }) => (
-  <div className="card bg-base-200 shadow-lg hover:shadow-2xl transition-transform hover:-translate-y-2 duration-300">
-    <figure className="p-6 bg-base-100 flex justify-center">
-      <img src={image} alt={name} className="w-full h-48 object-contain" />
-    </figure>
-    <div className="card-body items-center text-center">
-      <h3 className="card-title text-base-content">{name}</h3>
-      <p className="badge badge-outline mt-2 text-primary">{price}</p>
-      <div className="card-actions mt-4">
-        <button className="btn btn-primary btn-sm sm:btn-md rounded-full">
-          Explore Details
-        </button>
+const BikeCard = ({ id, name, price, image }) => {
+  const navigate = useNavigate();
+  return (
+    <div className="card bg-base-200 shadow-lg hover:shadow-2xl transition-transform hover:-translate-y-2 duration-300">
+      <figure className="p-6 bg-base-100 flex justify-center">
+        <img src={image} alt={name} className="w-full h-48 object-contain" />
+      </figure>
+      <div className="card-body items-center text-center">
+        <h3 className="card-title text-base-content">{name}</h3>
+        <p className="badge badge-outline mt-2 text-primary">{price}</p>
+        <div className="card-actions mt-4">
+          <button
+            onClick={() => navigate(`/explore/bikespecs/${id}`)}
+            className="btn btn-primary btn-sm sm:btn-md rounded-full"
+          >
+            Explore Details
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 // Explore Page
 const Explore = () => {
@@ -146,6 +155,7 @@ const Explore = () => {
           {bikes.map((bike) => (
             <BikeCard
               key={bike.id}
+              id={bike.id}
               name={bike.name}
               price={bike.price}
               image={bike.image}

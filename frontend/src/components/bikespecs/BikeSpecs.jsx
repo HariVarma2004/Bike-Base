@@ -11,17 +11,14 @@ const BikeSpecs = ({ bike }) => {
             src={bike.image}
             alt={`${bike.brand} ${bike.name}`}
             className="w-full max-w-4xl h-full object-contain"
-            onError={(e) => {
-              e.target.style.display = 'none';
-              const fallback = document.getElementById('image-fallback');
-              if (fallback) fallback.style.display = 'flex';
-            }}
+            onError={(e) => { e.currentTarget.src = "/fallback-bike.png"; }}
           />
+
           <div id="image-fallback" className="hidden absolute inset-0 bg-base-100 items-center justify-center">
             <span className="text-2xl text-base-content/60">Bike Image Not Available</span>
           </div>
         </div>
-        
+
         {/* Overlay Content */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-center">
           <p className="text-xl font-bold text-base-content bg-base-100/80 backdrop-blur-sm px-4 py-2 rounded-lg">
@@ -103,8 +100,8 @@ const BikeSpecs = ({ bike }) => {
               </h2>
 
               <div className="space-y-6">
-                <SpecCategory 
-                  title="Performance" 
+                <SpecCategory
+                  title="Performance"
                   specs={[
                     { label: "Displacement", value: `${bike.engineCapacity} cc` },
                     { label: "Max Power", value: `${bike.power} HP` },
@@ -112,37 +109,37 @@ const BikeSpecs = ({ bike }) => {
                     { label: "Top Speed", value: `${bike.topSpeed} km/h` },
                     { label: "Mileage", value: `${bike.milage} kmpl` },
                     { label: "Transmission", value: bike.transmission },
-                  ]} 
+                  ]}
                 />
 
-                <SpecCategory 
-                  title="Dimensions" 
+                <SpecCategory
+                  title="Dimensions"
                   specs={[
                     { label: "Kerb Weight", value: `${bike.weight} kg` },
                     { label: "Seat Height", value: `${bike.seatHeight} mm` },
                     { label: "Fuel Capacity", value: `${bike.fuelCapacity} L` },
                     { label: "Fuel Type", value: bike.fuelType },
-                  ]} 
+                  ]}
                 />
 
-                <SpecCategory 
-                  title="Chassis & Brakes" 
+                <SpecCategory
+                  title="Chassis & Brakes"
                   specs={[
                     { label: "Braking System", value: bike.brakes },
                     { label: "Suspension", value: bike.suspension },
                     { label: "Tire Type", value: bike.tires },
                     { label: "ABS", value: "Dual Channel" },
-                  ]} 
+                  ]}
                 />
 
-                <SpecCategory 
-                  title="Additional Information" 
+                <SpecCategory
+                  title="Additional Information"
                   specs={[
                     { label: "Model Year", value: bike.year },
                     { label: "Availability", value: bike.available ? "In Stock" : "Out of Stock" },
                     { label: "Warranty", value: "2 Years" },
                     { label: "Service Interval", value: "5000 km" },
-                  ]} 
+                  ]}
                 />
               </div>
             </div>
@@ -173,13 +170,13 @@ const SpecCard = ({ value, unit, label }) => (
 );
 
 const ColorOption = ({ color }) => {
-  const colorName = color === '#FF6600' ? 'Orange' : 
-                   color === '#000000' ? 'Black' : 
-                   color === '#FFFFFF' ? 'White' : 'Red';
-  
+  const colorName = color === '#FF6600' ? 'Orange' :
+    color === '#000000' ? 'Black' :
+      color === '#FFFFFF' ? 'White' : 'Red';
+
   return (
     <div className="text-center">
-      <div 
+      <div
         className="w-12 h-12 rounded-full border-2 border-base-300 mx-auto mb-2 shadow-md"
         style={{ backgroundColor: color }}
       ></div>

@@ -12,6 +12,7 @@ import Users from "./components/admin/Users.jsx";
 // import Settings from "./components/admin/Settings.jsx"
 
 import Explore from "./components/Explore/explore.jsx";
+import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
 import ContactUs from "./components/contactUs/Contact.jsx";
 import AboutUs from "./components/aboutUs/About.jsx";
 
@@ -51,6 +52,15 @@ createRoot(document.getElementById("root")).render(
           element={
             <MainLayout>
               <Explore />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/explore/bikespecs/:id"
+          element={
+            <MainLayout>
+              <BikeSpecs />
             </MainLayout>
           }
         />

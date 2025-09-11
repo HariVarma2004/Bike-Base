@@ -9,6 +9,7 @@ import AboutSite from "./components/AboutUs/AboutSite";
 function App() {
   // Add bike state with all required properties
   const [activeBike] = useState({
+    id: 1,
     brand: "KTM",
     name: "Duke 390",
     model: "390",

@@ -1,4 +1,4 @@
-// src/components/Register.jsx (completely fixed alignment)
+// src/components/Register.jsx (FIXED)
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -34,28 +34,38 @@ export default function Register() {
     }
 
     try {
-      // Register the user
-      await axios.post("http://localhost:5000/api/auth/register", {
+      console.log("Attempting to register user:", formData.email);
+      
+      // Register the user only (no auto-login for now)
+      const registerResponse = await axios.post("http://localhost:5000/api/auth/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: "user" // Default role for registration
+        role: "user"
       });
 
-      // Auto-login after successful registration
-      const loginRes = await axios.post("http://localhost:5000/api/auth/login", {
-        email: formData.email,
-        password: formData.password
-      });
+      console.log("Registration successful:", registerResponse.data);
 
-      const { token, role, name } = loginRes.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("userName", name);
-
-      navigate(role === "admin" ? "/admin-dashboard" : "/user-dashboard");
+      // Show success message and redirect to login
+      alert("Registration successful! Please login with your credentials.");
+      navigate("/login");
+      
     } catch (err) {
-      setError(err.response?.data?.error || "Registration failed. Please try again.");
+      console.error("Registration error details:", err);
+      
+      if (err.response) {
+        // Server responded with error status
+        const errorMessage = err.response.data.error || 
+                            err.response.data.message || 
+                            `Registration failed with status ${err.response.status}`;
+        setError(errorMessage);
+      } else if (err.request) {
+        // Request was made but no response received
+        setError("Cannot connect to server. Please check if the backend is running on port 5000.");
+      } else {
+        // Other errors
+        setError("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

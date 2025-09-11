@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import App from "./App.jsx";
 import MainLayout from "./components/layout/MainLayout.jsx";
@@ -16,25 +16,9 @@ import Login from "./components/login/Login";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
 import AdminDashboard from "./components/AdminDashboard";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
 import EditBike from "./components/admin/EditBike.jsx";
-
-// Simple ProtectedRoute component
-const ProtectedRoute = ({ children, role = "user" }) => {
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-  const userRole = localStorage.getItem("userRole");
-  
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-  
-  if (role && userRole !== role) {
-    return <Navigate to="/" replace />;
-  }
-  
-  return children;
-};
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -104,12 +88,47 @@ createRoot(document.getElementById("root")).render(
           }
         />
 
-        {/* Admin Dashboard */}
-        <Route path="/admin" element={<AdminLayout />} />
-        <Route path="/admin/add-bike" element={<AddBike />} />
-        <Route path="/admin/all-bikes" element={<AllBikes />} />
-        <Route path="/admin/edit-bike/:id" element={<EditBike />} />
-        <Route path="/admin/users" element={<Users />} />
+        {/* Admin Dashboard - PROTECTED ROUTES */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/add-bike"
+          element={
+            <ProtectedRoute role="admin">
+              <AddBike />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/all-bikes"
+          element={
+            <ProtectedRoute role="admin">
+              <AllBikes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/edit-bike/:id"
+          element={
+            <ProtectedRoute role="admin">
+              <EditBike />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute role="admin">
+              <Users />
+            </ProtectedRoute>
+          }
+        />
 
         {/* 404 */}
         <Route

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Hero5 from "../../assets/Hero5.jpg";
 import Hero6 from "../../assets/Hero6.jpg";
 import Hero7 from "../../assets/Hero7.jpg";
@@ -37,6 +38,7 @@ const mobileImagePositions = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -122,11 +124,15 @@ const Home = () => {
         
         {/* CTA Buttons - Hidden on mobile in favor of bottom button */}
         <div className="hidden sm:flex flex-col sm:flex-row gap-4 md:gap-6 mb-8 md:mb-16 w-full max-w-xs sm:max-w-md justify-center">
-          <button className="btn btn-primary btn-lg md:btn-xl rounded-full px-6 md:px-8 py-3 text-white font-semibold shadow-lg transform transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
+          <button
+          onClick={() => navigate("/explore")} 
+          className="btn btn-primary btn-lg md:btn-xl rounded-full px-6 md:px-8 py-3 text-white font-semibold shadow-lg transform transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
             Explore Collection
           </button>
-          <button className="btn btn-outline btn-lg md:btn-xl rounded-full px-6 md:px-8 py-3 text-white border-white font-semibold hover:bg-white hover:text-primary transform transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
-            Book a Test Ride
+          <button
+           onClick={() => navigate("/about")} 
+           className="btn btn-outline btn-lg md:btn-xl rounded-full px-6 md:px-8 py-3 text-white border-white font-semibold hover:bg-white hover:text-primary transform transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
+            About us
           </button>
         </div>
       </div>
@@ -150,7 +156,9 @@ const Home = () => {
         </div>
 
         {/* Explore Button - Only visible on mobile */}
-        <button className="btn btn-primary rounded-full text-base sm:hidden shadow-lg px-6 py-2.5 font-medium">
+        <button 
+        onClick={() => navigate("/explore")}
+        className="btn btn-primary rounded-full text-base sm:hidden shadow-lg px-6 py-2.5 font-medium">
           Explore Now
         </button>
       </div>

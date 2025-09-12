@@ -61,18 +61,19 @@ const Explore = () => {
   const [loading, setLoading] = useState(true);
 
   // Fetch bikes from backend
-  useEffect(() => {
-    fetch("https://bike-base-backend-2rde.onrender.com/api/bikes") 
-    // fetch("http://localhost:5000/api/bikes") 
-      .then((data) => {
-        setBikes(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching bikes:", err);
-        setLoading(false);
-      });
-  }, []);
+ useEffect(() => {
+  fetch("https://bike-base-backend-2rde.onrender.com/api/bikes")
+    .then((res) => res.json())   // ✅ parse JSON
+    .then((data) => {
+      console.log("API response:", data); // Debug: see shape
+      setBikes(data);  // assuming your backend returns an array
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching bikes:", err);
+      setLoading(false);
+    });
+}, []);
 
   return (
     <div data-theme="forest">

@@ -92,6 +92,8 @@ const Navigation = () => {
         ref={headerRef}
         className="navbar bg-base-100 shadow-md px-6 py-3 fixed top-0 left-0 right-0 z-50"
       >
+
+
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
           {/* Left: Logo */}
           <div ref={logoRef} className="flex items-center flex-shrink-0 min-w-[120px]">
@@ -103,6 +105,7 @@ const Navigation = () => {
               MOTOVEX
             </Link>
           </div>
+
 
           {/* Center Links (Desktop Only) */}
           <div

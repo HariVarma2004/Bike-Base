@@ -61,7 +61,7 @@ const BikeSpecs = () => {
           </div>
           <h1 className="text-5xl font-bold mb-6">
             <span className="text-primary">{bike.brand}</span>{" "}
-            <span className="text-neutral">{bike.name}</span>
+            <span className="text-primary">{bike.name}</span>
           </h1>
           <p className="text-lg text-base-content/80 max-w-4xl mx-auto leading-relaxed">
             {bike.description}

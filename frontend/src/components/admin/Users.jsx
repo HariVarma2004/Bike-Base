@@ -1,34 +1,57 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function Users() {
-  // Mock data (replace with API later)
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      role: "Admin",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      role: "User",
-      status: "Inactive",
-    },
-    {
-      id: 3,
-      name: "Mike Ross",
-      email: "mike@example.com",
-      role: "Moderator",
-      status: "Active",
-    },
-  ]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch users from backend
   useEffect(() => {
-    // later: fetch("/api/users") and setUsers(data)
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/users"); // 👈 replace with your backend URL
+        if (!res.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, []);
+
+  if (loading) return <p>Loading users...</p>;
+  if (error) return <p className="text-red-500">Error: {error}</p>;
+
+  const handleDelete = async (userId) => {
+    // Show a confirmation dialog before proceeding
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+          method: "DELETE",
+        });
+
+        if (!res.ok) {
+          const text = await res.text().catch(() => null);
+          throw new Error(text || "Failed to delete user");
+        }
+
+        // Remove the deleted user from the state to update the UI
+        setUsers(users.filter((user) => user._id !== userId));
+        alert("✅ User deleted successfully!");
+      } catch (err) {
+        console.error("Delete error:", err);
+        // Use an alert since we can't use confirm in the sandbox
+        alert(`❌ Failed to delete: ${err.message}`);
+      }
+    }
+  };
+
 
   return (
     <div className="bg-base-100 shadow-xl rounded-2xl p-6">
@@ -41,7 +64,6 @@ export default function Users() {
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="table w-full">
-          {/* Table Head */}
           <thead>
             <tr className="bg-base-200 text-sm text-gray-500">
               <th>ID</th>
@@ -53,7 +75,6 @@ export default function Users() {
             </tr>
           </thead>
 
-          {/* Table Body */}
           <tbody>
             {users.map((user) => (
               <tr key={user.id} className="hover">
@@ -65,18 +86,22 @@ export default function Users() {
                 </td>
                 <td>
                   <span
-                    className={`badge ${
-                      user.status === "Active"
-                        ? "badge-success"
-                        : "badge-error"
-                    }`}
+                    className={`badge ${user.status === "Active"
+                      ? "badge-success"
+                      : "badge-error"
+                      }`}
                   >
                     {user.status}
                   </span>
                 </td>
                 <td className="flex justify-center gap-2">
-                  <button className="btn btn-xs btn-outline">✏️ Edit</button>
-                  <button className="btn btn-xs btn-error text-white">
+                  <button className="btn btn-xs btn-outline">
+                    <Link
+                      to={`/admin/users/edit-user/${user._id}`}
+                    > ✏️ Edit </Link></button>
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn btn-xs btn-error text-white">
                     🗑 Delete
                   </button>
                 </td>

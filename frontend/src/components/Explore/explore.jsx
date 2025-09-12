@@ -29,6 +29,8 @@ const BrandCard = ({ name, logo }) => (
   </div>
 );
 
+
+
 // Bike Card Component
 const BikeCard = ({ id, name, price, image }) => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ dotenv.config();
 
 // Middlewares
 app.use(express.json());
-app.use(cors({ origin: "https://bike-base-frontend.onrender.com/" }));
+app.use(cors({ origin: "https://bike-base-frontend.onrender.com" }));
 // app.use(cors({ origin: "http://localhost:5173" }));
 
 

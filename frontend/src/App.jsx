@@ -5,7 +5,7 @@ import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AddBike from "./components/admin/AddBike.jsx";
 import AllBikes from "./components/admin/AllBikes.jsx";
 import Users from "./components/admin/Users.jsx";
-import Explore from "./components/explore/explore.jsx";
+import Explore from "./components/Explore/explore.jsx";
 import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
 import ContactUs from "./components/contactUs/contact.jsx";
 import AboutUs from "./components/aboutUs/about.jsx";

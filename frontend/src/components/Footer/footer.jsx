@@ -8,7 +8,7 @@ export default function Footer() {
         
         {/* Brand Section */}
         <div>
-          <h2 className="text-2xl font-extrabold text-primary tracking-wide">BikeBase</h2>
+          <h2 className="text-2xl font-extrabold text-primary tracking-wide">Motovex</h2>
           <p className="mt-3 text-sm opacity-80">
             Your trusted hub for bikes, garages, and community rides.  
             Experience speed, power, and innovation with us.
@@ -48,7 +48,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="mt-8 border-t border-base-300 pt-6 text-center text-sm opacity-70">
-        © {new Date().getFullYear()} BikeBase. All Rights Reserved.
+        © {new Date().getFullYear()} Motovex. All Rights Reserved.
       </div>
     </footer>
     </div>

@@ -19,7 +19,7 @@ export default function ContactUs() {
 
           <div className="flex items-center gap-4">
             <Mail className="text-primary" />
-            <p className="opacity-80">support@bikebase.com</p>
+            <p className="opacity-80">support@Motovex.com</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -30,7 +30,7 @@ export default function ContactUs() {
           <div className="flex items-center gap-4">
             <MapPin className="text-primary" />
             <p className="opacity-80">
-              BikeBase HQ, Madurai, Tamil Nadu, India
+              Motovex HQ, Madurai, Tamil Nadu, India
             </p>
           </div>
         </div>

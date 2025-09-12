@@ -69,7 +69,7 @@ export default function Login() {
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
         <div className="card-body p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-primary">BikeBase</h1>
+            <h1 className="text-3xl font-bold text-primary">Motovex</h1>
             <p className="text-base-content mt-2">Sign in to your account</p>
           </div>
           

@@ -9,8 +9,13 @@ export default function Profile() {
       {/* Logo + Motive */}
       <div className="text-center mb-16">
         <img
+<<<<<<< HEAD
           src={Logo} 
           alt="BikeBase Logo"
+=======
+          src={Logo} // Use the imported logo
+          alt="Motovex Logo"
+>>>>>>> fd3e0134d01d5d4c2f701b5354eb193e6d105bab
           className="mx-auto w-24 h-24 mb-4 drop-shadow-lg object-contain"
           onError={(e) => {
             // Fallback if image fails to load
@@ -23,7 +28,7 @@ export default function Profile() {
           BB
         </div>
         <h1 className="text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-3">
-          BikeBase
+          Motovex
         </h1>
         <p className="text-base-content/70 max-w-2xl mx-auto leading-relaxed">
           Our motive is to unite bikers across the world with a platform that

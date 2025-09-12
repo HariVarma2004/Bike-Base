@@ -1,4 +1,4 @@
-import Bike from "../models/bike.js";
+import Bike from "../models/Bike.js";
 
 export async function getAllBikes(req, res) {
     try {

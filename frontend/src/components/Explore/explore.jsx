@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 // Brand logos (still hardcoded, since backend only handles bikes for now)
 const brands = [
-  { id: 1, name: "Yamaha", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Yamaha_logo.svg" },
-  { id: 2, name: "Kawasaki", logo: "https://upload.wikimedia.org/wikipedia/commons/7/72/Kawasaki_logo.svg" },
-  { id: 3, name: "Royal Enfield", logo: "https://upload.wikimedia.org/wikipedia/commons/1/13/Royal_Enfield_logo.png" },
-  { id: 4, name: "Suzuki", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Suzuki_logo_2.svg" },
-  { id: 5, name: "KTM", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/KTM-Logo.svg" },
-  { id: 6, name: "Harley Davidson", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/Harley-Davidson_logo.svg" },
-  { id: 7, name: "TVS", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f2/TVS_Motor_Company_logo.svg" },
-  { id: 8, name: "Triumph", logo: "https://upload.wikimedia.org/wikipedia/commons/4/48/Triumph_Motorcycles_Logo.svg" },
+  { id: 1, name: "Yamaha", logo: "https://i.postimg.cc/brGbrp5m/yamaha-logo.png" },
+  { id: 2, name: "Kawasaki", logo: "https://i.postimg.cc/8Ctrb7Qy/kawasaki.png" },
+  { id: 3, name: "Royal Enfield", logo: "https://i.postimg.cc/tgXxPhfZ/Royal-Enfield-logo.png" },
+  { id: 4, name: "Suzuki", logo: "https://i.postimg.cc/CxpDMys4/Suzuki-logo.png" },
+  { id: 5, name: "KTM", logo: "https://i.postimg.cc/qRv2f8xV/ktm.png" },
+  { id: 6, name: "Bajaj", logo: "https://i.postimg.cc/wMPXQ7JK/bajaj-logo.png" },
+  { id: 7, name: "TVS", logo: "https://i.postimg.cc/XJ1dnpsZ/TVS-Motor-Logo.png" },
+  { id: 8, name: "Hero", logo: "https://i.postimg.cc/ryYNkYHh/Hero-logo.png" },
 ];
 
 // Brand Card Component

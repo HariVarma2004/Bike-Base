@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navigation from "../navigation/Navigation";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/footer";
 
 export default function MainLayout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

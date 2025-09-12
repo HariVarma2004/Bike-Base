@@ -16,13 +16,13 @@ app.use(cors({ origin: "https://bike-base-frontend.onrender.com/" }));
 
 
 // Routes
-app.use('https://bike-base-frontend.onrender.com/api/bikes', bikeRouter);
-app.use('https://bike-base-frontend.onrender.com/api/auth', authRouter); 
-app.use('https://bike-base-frontend.onrender.com/api/users', userRouter); // Add user routes
+app.use('/api/bikes', bikeRouter);
+app.use('/api/auth', authRouter); 
+app.use('/api/users', userRouter); // Add user routes
 
 // Health check endpoint
-app.get('https://bike-base-frontend.onrender.com/api/health', (req, res) => {
-  res.json({ message: 'Server is running successfully!' });
+app.get('/api/health', (req, res) => {
+  res.json({ message: 'Server is running successfully!' });
 });
 
 

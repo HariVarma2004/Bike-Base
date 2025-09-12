@@ -7,7 +7,7 @@ import AllBikes from "./components/admin/AllBikes.jsx";
 import Users from "./components/admin/Users.jsx";
 import Explore from "./components/Explore/explore.jsx";
 import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
-import ContactUs from "./components/contactUs/contact.jsx";
+import ContactUs from "./components/ContactUs/contact.jsx";
 import AboutUs from "./components/aboutUs/about.jsx";
 import Login from "./components/login/Login";
 import Register from "./components/Register";

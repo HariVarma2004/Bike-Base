@@ -34,7 +34,7 @@ export default function EditBike() {
         if (!res.ok) throw new Error("Failed to fetch bike");
         const data = await res.json();
 
-        // Normalize numeric fields to strings to allow safe editing (deletion/backspace)
+        // Normalize decimal fields to strings to allow safe editing (deletion/backspace)
         const norm = { ...data };
         NUMBER_FIELDS.forEach((f) => {
           norm[f] = (data && data[f] !== undefined && data[f] !== null) ? String(data[f]) : "";
@@ -59,7 +59,7 @@ export default function EditBike() {
   }, [id]);
 
   // Generic change handler:
-  // - numeric fields allow digits only (empty allowed)
+  // - decimal fields allow digits only (empty allowed)
   // - colorOptions input is comma-separated string -> stored as array
   // - checkbox handled normally
   const handleChange = (e) => {
@@ -78,18 +78,19 @@ export default function EditBike() {
     }
 
     if (NUMBER_FIELDS.has(name)) {
-      // allow only digits (empty string allowed to support deletion)
-      if (/^\d*$/.test(value)) {
+      // allow digits and optional single decimal point (empty string allowed)
+      if (/^\d*\.?\d*$/.test(value)) {
         setBike((p) => ({ ...p, [name]: value }));
       }
       return;
     }
 
+
     // default (text)
     setBike((p) => ({ ...p, [name]: value }));
   };
 
-  // Submit: convert numeric strings to numbers before sending
+  // Submit: convert decimal strings to numbers before sending
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -168,8 +169,9 @@ export default function EditBike() {
             onChange={handleChange}
             className="input input-bordered w-full"
             placeholder="e.g. 2024"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             required
           />
         </label>
@@ -184,8 +186,9 @@ export default function EditBike() {
             value={bike.price ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             required
             placeholder="e.g. 180000"
           />
@@ -203,8 +206,9 @@ export default function EditBike() {
             value={bike.milage ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             required
             placeholder="e.g. 45"
           />
@@ -217,8 +221,9 @@ export default function EditBike() {
             value={bike.engineCapacity ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             required
             placeholder="e.g. 155"
           />
@@ -231,8 +236,9 @@ export default function EditBike() {
             value={bike.topSpeed ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 150"
           />
         </label>
@@ -244,8 +250,9 @@ export default function EditBike() {
             value={bike.power ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 18"
           />
         </label>
@@ -257,8 +264,9 @@ export default function EditBike() {
             value={bike.torque ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 14"
           />
         </label>
@@ -301,8 +309,9 @@ export default function EditBike() {
             value={bike.weight ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 142"
           />
         </label>
@@ -314,8 +323,9 @@ export default function EditBike() {
             value={bike.seatHeight ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 815"
           />
         </label>
@@ -327,8 +337,9 @@ export default function EditBike() {
             value={bike.fuelCapacity ?? ""}
             onChange={handleChange}
             className="input input-bordered w-full"
-            inputMode="numeric"
-            pattern="[0-9]*"
+            inputMode="decimal"
+            step="any"
+            type="number"
             placeholder="e.g. 11"
           />
         </label>

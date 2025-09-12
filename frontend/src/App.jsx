@@ -16,7 +16,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditBike from "./components/admin/EditBike.jsx";
 import EditUser from "./components/admin/EditUser.jsx";
-
+import SearchResults from "./components/search/SearchResults.jsx";
 // Blog components
 import BlogList from "./components/Blog/BlogList.jsx";
 import BlogPost from "./components/Blog/BlogPost.jsx";
@@ -91,6 +91,15 @@ function App() {
           <MainLayout>
             <BlogPost />
           </MainLayout>
+        }
+      />
+
+      <Route
+       path="/search"
+       element={
+         <MainLayout>
+           <SearchResults />
+         </MainLayout>
         }
       />
 

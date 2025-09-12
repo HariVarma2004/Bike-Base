@@ -2,14 +2,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, User, X, Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const DEFAULT_SEARCH_PX = 300;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const Navigation = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [maxSearchWidth, setMaxSearchWidth] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const headerRef = useRef(null);
@@ -17,10 +21,56 @@ const Navigation = () => {
   const centerRef = useRef(null);
   const rightRef = useRef(null);
   const inputRef = useRef(null);
+  const searchContainerRef = useRef(null);
 
   useEffect(() => {
-    if (showSearch) inputRef.current?.focus();
+    if (showSearch) {
+      inputRef.current?.focus();
+      measure();
+    }
   }, [showSearch]);
+
+  // Fetch bike suggestions based on search query
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (searchQuery.length < 2) {
+        setSearchSuggestions([]);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        // For development - mock data
+        const mockBikes = [
+          { _id: "1", name: "Mountain Explorer", brand: "Trek", category: "Mountain Bike" },
+          { _id: "2", name: "Road Warrior", brand: "Specialized", category: "Road Bike" },
+          { _id: "3", name: "City Cruiser", brand: "Giant", category: "Hybrid Bike" },
+        ];
+        
+        const filteredBikes = mockBikes.filter(bike =>
+          bike.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          bike.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          bike.category.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        
+        setSearchSuggestions(filteredBikes);
+        
+        // For production with real API:
+        /*
+        const response = await axios.get(`${API_BASE_URL}/api/bikes/search?q=${searchQuery}`);
+        setSearchSuggestions(response.data);
+        */
+      } catch (error) {
+        console.error("Error fetching search suggestions:", error);
+        setSearchSuggestions([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(fetchSuggestions, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
 
   const measure = () => {
     const logo = logoRef.current;
@@ -43,39 +93,61 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    measure();
     const onResize = () => measure();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [showSearch]);
+  }, []);
 
+  // Close search when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (showSearch && headerRef.current && !headerRef.current.contains(e.target)) {
+      if (showSearch && searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
         setShowSearch(false);
+        setSearchSuggestions([]);
+      }
+      if (mobileMenuOpen && headerRef.current && !headerRef.current.contains(e.target)) {
+        setMobileMenuOpen(false);
       }
     };
+    
     const handleKey = (e) => {
       if (e.key === "Escape") {
         setShowSearch(false);
+        setSearchSuggestions([]);
         setMobileMenuOpen(false);
+      } else if (e.key === "Enter" && showSearch && searchQuery.trim() && searchSuggestions.length > 0) {
+        handleBikeSelect(searchSuggestions[0]);
       } else if (e.key === "Enter" && showSearch && searchQuery.trim()) {
-        handleSearch();
+        handleSearchSubmit(e);
       }
     };
+    
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleKey);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKey);
     };
-  }, [showSearch, searchQuery]);
+  }, [showSearch, searchQuery, searchSuggestions, mobileMenuOpen]);
 
-  const handleSearch = () => {
-    if (searchQuery.trim()) {
+  // Handle bike selection from suggestions
+  const handleBikeSelect = (bike) => {
+    setSearchQuery("");
+    setSearchSuggestions([]);
+    setShowSearch(false);
+    navigate(`/explore/bikespecs/${bike._id}`);
+  };
+
+  // Handle search form submission
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim() && searchSuggestions.length > 0) {
+      handleBikeSelect(searchSuggestions[0]);
+    } else if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-      setShowSearch(false);
       setSearchQuery("");
+      setSearchSuggestions([]);
+      setShowSearch(false);
     }
   };
 
@@ -91,9 +163,8 @@ const Navigation = () => {
       <nav
         ref={headerRef}
         className="navbar bg-base-100 shadow-md px-6 py-3 fixed top-0 left-0 right-0 z-50"
+        data-theme="forest"
       >
-
-
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
           {/* Left: Logo */}
           <div ref={logoRef} className="flex items-center flex-shrink-0 min-w-[120px]">
@@ -106,7 +177,6 @@ const Navigation = () => {
             </Link>
           </div>
 
-
           {/* Center Links (Desktop Only) */}
           <div
             ref={centerRef}
@@ -116,7 +186,7 @@ const Navigation = () => {
               <Link 
                 key={link.path}
                 to={link.path} 
-                className="btn btn-ghost normal-case text-base"
+                className="btn btn-ghost normal-case text-base hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -125,41 +195,86 @@ const Navigation = () => {
 
           {/* Right Icons */}
           <div ref={rightRef} className="flex items-center gap-3 relative">
-            {/* Expanding Search */}
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{
-                width: showSearch ? maxSearchWidth : 0,
-                opacity: showSearch ? 1 : 0,
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                placeholder="Search..."
-                className="input input-bordered w-full max-w-xs"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </motion.div>
+            {/* Search Container */}
+            <div ref={searchContainerRef} className="relative">
+              {/* Search Toggle */}
+              <button
+                aria-label="Toggle search"
+                className="btn btn-ghost btn-circle"
+                onClick={() => {
+                  setShowSearch((s) => !s);
+                  setSearchSuggestions([]);
+                  setSearchQuery("");
+                }}
+              >
+                <Search size={22} className="text-primary" />
+              </button>
 
-            {/* Search Toggle */}
-            <button
-              aria-label="Toggle search"
-              className="btn btn-ghost btn-circle"
-              onClick={() => {
-                setShowSearch((s) => !s);
-                setTimeout(measure, 0);
-              }}
-            >
-              <Search size={22} />
-            </button>
+              {/* Search Overlay */}
+              <AnimatePresence>
+                {showSearch && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 mt-3 bg-base-100 border border-primary rounded-lg shadow-xl p-4 w-80 z-50"
+                  >
+                    <form onSubmit={handleSearchSubmit} className="relative mb-2">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        placeholder="Search bikes by name, brand, or category..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="input input-bordered input-primary w-full pr-10 bg-base-100"
+                        autoFocus
+                      />
+                      <button
+                        type="submit"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary"
+                      >
+                        <Search size={18} />
+                      </button>
+                    </form>
+                    
+                    {/* Search Suggestions */}
+                    {searchSuggestions.length > 0 && (
+                      <div className="bg-base-100 rounded-lg max-h-60 overflow-y-auto">
+                        {searchSuggestions.map((bike) => (
+                          <div
+                            key={bike._id}
+                            className="p-3 hover:bg-base-200 cursor-pointer transition-colors border-b border-base-200 last:border-b-0 rounded-lg"
+                            onClick={() => handleBikeSelect(bike)}
+                          >
+                            <div className="font-medium text-primary">{bike.name}</div>
+                            <div className="text-sm text-base-content/70">
+                              {bike.brand} • {bike.category}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {isLoading && (
+                      <div className="p-3 text-center">
+                        <span className="loading loading-spinner loading-sm text-primary"></span>
+                      </div>
+                    )}
+                    
+                    {searchQuery.length >= 2 && !isLoading && searchSuggestions.length === 0 && (
+                      <div className="p-3 text-center text-base-content/70">
+                        No bikes found matching "{searchQuery}"
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* User Icon - Now routes to Login */}
             <Link to="/login" className="btn btn-ghost btn-circle">
-              <User size={22} />
+              <User size={22} className="text-primary" />
             </Link>
 
             {/* Mobile Menu Toggle */}
@@ -168,7 +283,7 @@ const Navigation = () => {
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open mobile menu"
             >
-              <Menu size={22} />
+              <Menu size={22} className="text-primary" />
             </button>
           </div>
         </div>
@@ -183,14 +298,15 @@ const Navigation = () => {
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed inset-0 bg-base-200 z-50 flex flex-col p-6"
+            data-theme="forest"
           >
             {/* Close button */}
             <button
-              className="btn btn-ghost self-end mb-6"
+              className="btn btn-ghost btn-circle self-end mb-6"
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close mobile menu"
             >
-              <X size={28} />
+              <X size={28} className="text-primary" />
             </button>
 
             {/* Mobile Links */}
@@ -200,6 +316,7 @@ const Navigation = () => {
                   <Link 
                     to={link.path} 
                     onClick={() => setMobileMenuOpen(false)}
+                    className="text-primary hover:text-secondary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -209,6 +326,7 @@ const Navigation = () => {
                 <Link 
                   to="/login" 
                   onClick={() => setMobileMenuOpen(false)}
+                  className="text-primary hover:text-secondary transition-colors"
                 >
                   Login
                 </Link>

@@ -1,13 +1,23 @@
-import express from 'express';
-import { getAllBikes , getBikeById ,createBike ,updateBike ,deleteBike } from '../controllers/bikesController.js';
-
+import express from "express";
+import {
+    getAllBikes,
+    getBikeById,
+    createBike,
+    updateBike,
+    deleteBike,
+    searchBikes,
+} from "../controllers/bikesController.js";
 
 const router = express.Router();
 
-router.get('/', getAllBikes);
-router.get('/:id', getBikeById);
-router.post('/', createBike);
-router.put('/:id', updateBike);
-router.delete('/:id', deleteBike);
+// --- Existing CRUD ---
+router.get("/", getAllBikes);
+router.get('/search', searchBikes); 
+router.get("/:id", getBikeById);
+router.post("/", createBike);
+router.put("/:id", updateBike);
+router.delete("/:id", deleteBike);
+
+
 
 export default router;

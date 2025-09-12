@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiSearch } from "react-icons/fi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -8,30 +12,26 @@ const SearchBar = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const searchRef = useRef(null);
+  const navigate = useNavigate();
 
-  const suggestions = [
-    "Pulsar 150",
-    "Splendor Plus",
-    "Ducati Panigale",
-    "TVS Apache RTR",
-    "Royal Enfield Classic",
-    "Yamaha R15",
-    "KTM Duke",
-    "Hero Honda",
-    "Accessories",
-    "Service Center",
-  ];
-
-  // Filter suggestions
+  // Fetch suggestions from backend
   useEffect(() => {
-    if (query.trim() === "") {
-      setFilteredSuggestions([]);
-      return;
-    }
-    const results = suggestions.filter((item) =>
-      item.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredSuggestions(results);
+    const fetchSuggestions = async () => {
+      if (query.trim() === "") {
+        setFilteredSuggestions([]);
+        return;
+      }
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/bikes/suggestions?q=${query}`);
+        setFilteredSuggestions(res.data);
+      } catch (err) {
+        console.error("Error fetching suggestions:", err);
+        setFilteredSuggestions([]);
+      }
+    };
+
+    const delayDebounce = setTimeout(fetchSuggestions, 300); // debounce
+    return () => clearTimeout(delayDebounce);
   }, [query]);
 
   // Close search if clicked outside
@@ -50,27 +50,12 @@ const SearchBar = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       setShowSuggestions(false);
+      navigate(`/search?q=${query}`);
     }
     if (e.key === "Escape") {
       setShowSuggestions(false);
       setExpanded(false);
     }
-  };
-
-  // Highlight matched text inside suggestions
-  const highlightMatch = (text) => {
-    if (!query) return text;
-    
-    const parts = text.split(new RegExp(`(${query})`, "gi"));
-    return parts.map((part, i) =>
-      part.toLowerCase() === query.toLowerCase() ? (
-        <span key={i} className="font-semibold text-blue-600">
-          {part}
-        </span>
-      ) : (
-        part
-      )
-    );
   };
 
   return (
@@ -128,9 +113,10 @@ const SearchBar = () => {
                   setQuery(item);
                   setShowSuggestions(false);
                   setExpanded(false);
+                  navigate(`/search?q=${item}`);
                 }}
               >
-                {highlightMatch(item)}
+                {item}
               </li>
             ))}
           </motion.ul>

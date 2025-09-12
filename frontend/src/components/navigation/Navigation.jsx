@@ -40,21 +40,10 @@ const Navigation = () => {
 
       setIsLoading(true);
       try {
-        // For development - mock data
-        const mockBikes = [
-          { _id: "1", name: "Mountain Explorer", brand: "Trek", category: "Mountain Bike" },
-          { _id: "2", name: "Road Warrior", brand: "Specialized", category: "Road Bike" },
-          { _id: "3", name: "City Cruiser", brand: "Giant", category: "Hybrid Bike" },
-        ];
-        
-        const filteredBikes = mockBikes.filter(bike =>
-          bike.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          bike.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          bike.category.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        
-        setSearchSuggestions(filteredBikes);
-        
+        const response = await axios.get(`${API_BASE_URL}/api/bikes/search?q=${searchQuery}`);
+        setSearchSuggestions(response.data);
+
+
         // For production with real API:
         /*
         const response = await axios.get(`${API_BASE_URL}/api/bikes/search?q=${searchQuery}`);
@@ -109,7 +98,7 @@ const Navigation = () => {
         setMobileMenuOpen(false);
       }
     };
-    
+
     const handleKey = (e) => {
       if (e.key === "Escape") {
         setShowSearch(false);
@@ -121,7 +110,7 @@ const Navigation = () => {
         handleSearchSubmit(e);
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleKey);
     return () => {
@@ -168,8 +157,8 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
           {/* Left: Logo */}
           <div ref={logoRef} className="flex items-center flex-shrink-0 min-w-[120px]">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-wide"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -183,9 +172,9 @@ const Navigation = () => {
             className="hidden md:flex gap-6 items-center absolute left-1/2 transform -translate-x-1/2"
           >
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
-                to={link.path} 
+                to={link.path}
                 className="btn btn-ghost normal-case text-base hover:text-primary transition-colors"
               >
                 {link.label}
@@ -237,7 +226,7 @@ const Navigation = () => {
                         <Search size={18} />
                       </button>
                     </form>
-                    
+
                     {/* Search Suggestions */}
                     {searchSuggestions.length > 0 && (
                       <div className="bg-base-100 rounded-lg max-h-60 overflow-y-auto">
@@ -255,13 +244,13 @@ const Navigation = () => {
                         ))}
                       </div>
                     )}
-                    
+
                     {isLoading && (
                       <div className="p-3 text-center">
                         <span className="loading loading-spinner loading-sm text-primary"></span>
                       </div>
                     )}
-                    
+
                     {searchQuery.length >= 2 && !isLoading && searchSuggestions.length === 0 && (
                       <div className="p-3 text-center text-base-content/70">
                         No bikes found matching "{searchQuery}"
@@ -313,8 +302,8 @@ const Navigation = () => {
             <ul className="menu text-lg space-y-4">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    to={link.path} 
+                  <Link
+                    to={link.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-primary hover:text-secondary transition-colors"
                   >
@@ -323,8 +312,8 @@ const Navigation = () => {
                 </li>
               ))}
               <li>
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-primary hover:text-secondary transition-colors"
                 >

@@ -83,3 +83,27 @@ export async function deleteBike(req, res) {
         console.log("Error in deleteBike:", error);
     }           
 }
+
+export const searchBikes = async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q) {
+      return res.json([]);
+    }
+
+    const regex = new RegExp(q, "i"); // case-insensitive
+    const bikes = await Bike.find({
+      $or: [
+        { name: regex },
+        { brand: regex },
+        { description: regex },
+        { model: regex }
+      ]
+    });
+
+    res.json(bikes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error searching bikes" });
+  }
+};

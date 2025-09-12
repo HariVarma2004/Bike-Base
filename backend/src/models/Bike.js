@@ -27,5 +27,5 @@ const bikeSchema = new mongoose.Schema({
 { timestamps: true }
 )
 
-const Bike = mongoose.model("Bike", bikeSchema);
+const Bike = mongoose.models.Bike || mongoose.model("Bike", bikeSchema);
 export default Bike;

@@ -26,56 +26,12 @@ export default function SearchResults() {
     setError("");
     
     try {
-      // For development - mock data
-      const mockBikes = [
-        { 
-          _id: "1", 
-          name: "Mountain Explorer", 
-          brand: "Trek", 
-          category: "Mountain Bike",
-          price: 1200,
-          image: "/api/placeholder/300/200",
-          description: "A rugged mountain bike for off-road adventures"
-        },
-        { 
-          _id: "2", 
-          name: "Road Warrior", 
-          brand: "Specialized", 
-          category: "Road Bike",
-          price: 1500,
-          image: "/api/placeholder/300/200",
-          description: "A fast road bike for speed enthusiasts"
-        },
-        { 
-          _id: "3", 
-          name: "City Cruiser", 
-          brand: "Giant", 
-          category: "Hybrid Bike",
-          price: 800,
-          image: "/api/placeholder/300/200",
-          description: "A comfortable bike for city commuting"
-        },
-      ];
-      
-      const filteredBikes = mockBikes.filter(bike =>
-        bike.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bike.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bike.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bike.description.toLowerCase().includes(searchQuery.toLowerCase())
+      // Call backend search API
+      const response = await axios.get(
+        `${API_BASE_URL}/api/bikes/search?q=${encodeURIComponent(searchQuery)}`
       );
-      
-      // Simulate API delay
-      setTimeout(() => {
-        setResults(filteredBikes);
-        setIsLoading(false);
-      }, 500);
-      
-      // For production:
-      /*
-      const response = await axios.get(`${API_BASE_URL}/api/bikes/search?q=${searchQuery}`);
       setResults(response.data);
       setIsLoading(false);
-      */
     } catch (err) {
       setError("Failed to fetch search results. Please try again.");
       console.error("Search error:", err);
@@ -131,7 +87,10 @@ export default function SearchResults() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {results.map((bike) => (
-                <div key={bike._id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                <div
+                  key={bike._id}
+                  className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow"
+                >
                   <figure className="h-48">
                     <img 
                       src={bike.image || "/api/placeholder/300/200"} 
@@ -142,9 +101,13 @@ export default function SearchResults() {
                   <div className="card-body">
                     <h2 className="card-title text-primary">{bike.name}</h2>
                     <p className="text-secondary font-semibold">{bike.brand}</p>
-                    <p className="badge badge-outline">{bike.category}</p>
-                    <p className="text-base-content/70 line-clamp-2">{bike.description}</p>
-                    <p className="text-lg font-bold text-primary">${bike.price}</p>
+                    {bike.category && (
+                      <p className="badge badge-outline">{bike.category}</p>
+                    )}
+                    <p className="text-base-content/70 line-clamp-2">
+                      {bike.description}
+                    </p>
+                    <p className="text-lg font-bold text-primary">₹{bike.price}</p>
                     <div className="card-actions justify-end mt-4">
                       <Link 
                         to={`/explore/bikespecs/${bike._id}`}

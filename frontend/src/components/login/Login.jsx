@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 // Use env variable for API base URL
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://bike-base-backend-2rde.onrender.com";
+const API_BASE_URL = "https://bike-base-backend-2rde.onrender.com";
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function Login() {

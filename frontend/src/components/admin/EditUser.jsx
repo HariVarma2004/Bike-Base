@@ -17,7 +17,8 @@ export default function EditUser() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${id}`);
+        const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/users/${id}`);
+        // const res = await fetch(`http://localhost:5000/api/users/${id}`);
         if (!res.ok) {
           throw new Error("Failed to fetch user data");
         }
@@ -49,7 +50,8 @@ export default function EditUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${id}`, {
+      // const res = await fetch(`http://localhost:5000/api/users/${id}`, {
+      const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/users/${id}`, {
         method: "PUT", 
         headers: {
           "Content-Type": "application/json",

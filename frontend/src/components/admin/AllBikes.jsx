@@ -8,7 +8,8 @@ export default function AllBikes() {
   useEffect(() => {
     const fetchBikes = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/bikes");
+        // const res = await fetch("http://localhost:5000/api/bikes");
+        const res = await fetch("https://bike-base-backend-2rde.onrender.com/api/bikes");
         if (!res.ok) throw new Error("Failed to fetch bikes");
         const data = await res.json();
         setBikes(data);
@@ -27,7 +28,8 @@ export default function AllBikes() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/bikes/${id}`, {
+      const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/bikes/${id}`, {
+      // const res = await fetch(`http://localhost:5000/api/bikes/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete bike");

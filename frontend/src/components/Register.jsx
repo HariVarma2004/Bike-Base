@@ -36,7 +36,8 @@ export default function Register() {
       console.log("Attempting to register user:", formData.email);
       
       // Register the user only 
-      const registerResponse = await axios.post("http://localhost:5000/api/auth/register", {
+      const registerResponse = await axios.post("https://bike-base-backend-2rde.onrender.com/api/auth/register", {
+      // const registerResponse = await axios.post("http://localhost:5000/api/auth/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,

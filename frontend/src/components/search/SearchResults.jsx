@@ -3,7 +3,8 @@ import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
 import MainLayout from "../layout/MainLayout";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://bike-base-backend-2rde.onrender.com";
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function SearchResults() {
   const [searchParams] = useSearchParams();

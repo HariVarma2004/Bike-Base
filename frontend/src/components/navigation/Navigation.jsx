@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const DEFAULT_SEARCH_PX = 300;
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://bike-base-backend-2rde.onrender.com";
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const Navigation = () => {
   const [showSearch, setShowSearch] = useState(false);

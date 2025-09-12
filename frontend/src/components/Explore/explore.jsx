@@ -62,7 +62,8 @@ const Explore = () => {
 
   // Fetch bikes from backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/bikes") 
+    fetch("https://bike-base-backend-2rde.onrender.com/api/bikes") 
+    // fetch("http://localhost:5000/api/bikes") 
       .then((data) => {
         setBikes(data);
         setLoading(false);

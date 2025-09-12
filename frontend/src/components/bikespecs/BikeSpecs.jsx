@@ -9,7 +9,8 @@ const BikeSpecs = () => {
   useEffect(() => {
     async function fetchBike() {
       try {
-        const res = await fetch(`http://localhost:5000/api/bikes/${id}`);
+        // const res = await fetch(`http://localhost:5000/api/bikes/${id}`);
+        const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/bikes/${id}`);
         if (!res.ok) throw new Error("Failed to fetch bike data");
         const data = await res.json();
         setBike(data);

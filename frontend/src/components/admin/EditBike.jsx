@@ -29,7 +29,8 @@ export default function EditBike() {
     async function fetchBike() {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/api/bikes/${id}`);
+        // const res = await fetch(`http://localhost:5000/api/bikes/${id}`);
+        const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/bikes/${id}`);
         if (!res.ok) throw new Error("Failed to fetch bike");
         const data = await res.json();
 
@@ -107,7 +108,8 @@ export default function EditBike() {
       payload.colorOptions = Array.isArray(payload.colorOptions) ? payload.colorOptions : [];
 
       // Send PUT
-      const res = await fetch(`http://localhost:5000/api/bikes/${id}`, {
+      const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/bikes/${id}`, {
+      // const res = await fetch(`http://localhost:5000/api/bikes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

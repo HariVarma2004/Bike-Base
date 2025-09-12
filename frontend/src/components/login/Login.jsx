@@ -83,17 +83,17 @@ export default function Login() {
             </div>
           )}
           
-          <form onSubmit={handleLogin} className="flex flex-col gap-5">
+          <form onSubmit={handleLogin} className="space-y-6">
             {/* Email Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-base-content">Email Address</span>
+                <span className="label-text text-base-content font-medium">Email Address</span>
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered input-primary"
+                className="input input-bordered input-primary w-full"
                 placeholder="Enter your email"
                 required
                 disabled={isLoading}
@@ -103,7 +103,7 @@ export default function Login() {
             {/* Password Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-base-content">Password</span>
+                <span className="label-text text-base-content font-medium">Password</span>
               </label>
               <div className="relative">
                 <input
@@ -117,7 +117,7 @@ export default function Login() {
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                   disabled={isLoading}
                 >
@@ -128,8 +128,8 @@ export default function Login() {
                   )}
                 </button>
               </div>
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+              <label className="label mt-1">
+                <a href="#" className="label-text-alt link link-hover text-sm">
                   Forgot password?
                 </a>
               </label>
@@ -140,15 +140,15 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
               >
                 {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
           </form>
           
-          <div className="text-center mt-6 pt-5 border-t border-base-300">
-            <p className="text-base-content">
+          <div className="text-center mt-8 pt-6 border-t border-base-300">
+            <p className="text-base-content text-sm">
               Don't have an account?{" "}
               <Link to="/register" className="link link-primary font-medium">
                 Sign up

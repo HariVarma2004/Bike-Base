@@ -1,4 +1,3 @@
-// src/pages/AboutUs.jsx
 export default function AboutUs() {
   return (
     <section data-theme ="forest" className="min-h-screen bg-base-100 text-base-content flex flex-col items-center py-12 px-6">

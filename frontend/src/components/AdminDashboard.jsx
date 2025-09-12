@@ -1,4 +1,3 @@
-// src/components/AdminDashboard.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -333,7 +332,7 @@ export default function AdminDashboard() {
             trendValue="+12%"
           />
           <StatCard 
-            icon={TruckIcon} // Using TruckIcon instead of BikeIcon
+            icon={TruckIcon} 
             value={stats.totalBikes} 
             label="Available Bikes" 
             trend="up" 

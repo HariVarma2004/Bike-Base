@@ -6,7 +6,7 @@ import Hero7 from "../../assets/Hero7.jpg";
 import Hero8 from "../../assets/Hero8.jpg";
 import Hero9 from "../../assets/Hero9.jpg";
 
-// Import your 5 portrait images for mobile (replace with your actual imports)
+// Imported portrait images for mobile 
 import Heromob1 from "../../assets/Heromob1.jpg";
 import Heromob2 from "../../assets/Heromob2.jpg";
 import Heromob3 from "../../assets/Heromob3.jpg";

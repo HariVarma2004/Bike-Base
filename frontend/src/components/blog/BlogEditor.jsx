@@ -15,7 +15,7 @@ const BlogEditor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would handle form submission to your API
+    // handle form submission to your API
     console.log('Form submitted:', formData);
     alert(isEditing ? 'Post updated successfully!' : 'Post created successfully!');
   };

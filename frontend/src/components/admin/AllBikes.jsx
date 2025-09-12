@@ -55,7 +55,7 @@ export default function AllBikes() {
           <div className="text-center py-6">⏳ Loading bikes...</div>
         ) : bikes.length > 0 ? (
           <>
-            {/* ✅ Table for Desktop */}
+            {/* Table for Desktop */}
             <div className="hidden md:block overflow-x-auto">
               <table className="table table-zebra w-full">
                 <thead>
@@ -117,7 +117,7 @@ export default function AllBikes() {
               </table>
             </div>
 
-            {/* ✅ Card Layout for Mobile */}
+            {/* Card Layout for Mobile */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
               {bikes.map((bike, index) => (
                 <div

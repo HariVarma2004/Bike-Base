@@ -4,7 +4,7 @@ import StatCard from "./ui/StatCard.jsx";
 import MobileLayout from "./layout/MobileLayout.jsx";
 import DesktopLayout from "./layout/DesktopLayout.jsx";
 
-// Main Component - Now accepts bike prop
+// Main Component 
 const MainComponent = ({ bike }) => {
   return (
     <div className="min-h-screen bg-base-100 text-base-content relative overflow-hidden">

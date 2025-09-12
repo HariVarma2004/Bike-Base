@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Brand logos (still hardcoded, since backend only handles bikes for now)
+// Brand logos
 const brands = [
   { id: 1, name: "Yamaha", logo: "https://i.postimg.cc/brGbrp5m/yamaha-logo.png" },
   { id: 2, name: "Kawasaki", logo: "https://i.postimg.cc/8Ctrb7Qy/kawasaki.png" },
@@ -62,8 +62,7 @@ const Explore = () => {
 
   // Fetch bikes from backend
   useEffect(() => {
-    fetch("http://localhost:5000/api/bikes") // backend endpoint
-      .then((res) => res.json())
+    fetch("http://localhost:5000/api/bikes") 
       .then((data) => {
         setBikes(data);
         setLoading(false);
@@ -98,7 +97,7 @@ const Explore = () => {
           <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {bikes.map((bike) => (
               <BikeCard
-                key={bike._id}   // use _id from MongoDB
+                key={bike._id}  
                 id={bike._id}
                 name={bike.name}
                 price={bike.price}

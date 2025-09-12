@@ -1,4 +1,4 @@
-// Bike Variant Component (DaisyUI Luxury Theme)
+// Bike Variant Component (DaisyUI Forest Theme)
 const BikeVariant = ({ color, name, active, onClick }) => {
   return (
     <button

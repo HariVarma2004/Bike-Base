@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function EditUser() {
-  const { id } = useParams(); // Get user ID from the URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
@@ -50,7 +50,7 @@ export default function EditUser() {
     e.preventDefault();
     try {
       const res = await fetch(`http://localhost:5000/api/users/${id}`, {
-        method: "PUT", // Use PUT method for updates
+        method: "PUT", 
         headers: {
           "Content-Type": "application/json",
         },
@@ -94,7 +94,7 @@ export default function EditUser() {
             value={formData.email}
             onChange={handleChange}
             className="input input-bordered w-full"
-            disabled // Email is usually not editable
+            disabled 
           />
         </div>
         <div>

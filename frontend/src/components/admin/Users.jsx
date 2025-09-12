@@ -9,7 +9,7 @@ export default function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/users"); // 👈 replace with your backend URL
+        const res = await fetch("http://localhost:5000/api/users"); 
         if (!res.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -29,7 +29,7 @@ export default function Users() {
   if (error) return <p className="text-red-500">Error: {error}</p>;
 
   const handleDelete = async (userId) => {
-    // Show a confirmation dialog before proceeding
+    // Show a conformation dialog before proceeding
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
         const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
@@ -46,7 +46,7 @@ export default function Users() {
         alert("✅ User deleted successfully!");
       } catch (err) {
         console.error("Delete error:", err);
-        // Use an alert since we can't use confirm in the sandbox
+        // Use an alert because we can't use confirm in the sandbox
         alert(`❌ Failed to delete: ${err.message}`);
       }
     }

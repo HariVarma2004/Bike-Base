@@ -1,7 +1,6 @@
-// src/pages/Profile.jsx
 import { Award, Globe2, MapPin, Activity } from "lucide-react";
 
-// Import your logo directly (adjust the path as needed)
+// Import your logo directly 
 import Logo from "../../assets/Logo.png";
 
 export default function Profile() {
@@ -10,7 +9,7 @@ export default function Profile() {
       {/* Logo + Motive */}
       <div className="text-center mb-16">
         <img
-          src={Logo} // Use the imported logo
+          src={Logo} 
           alt="BikeBase Logo"
           className="mx-auto w-24 h-24 mb-4 drop-shadow-lg object-contain"
           onError={(e) => {

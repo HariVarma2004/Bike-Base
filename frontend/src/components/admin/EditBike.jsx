@@ -1,4 +1,3 @@
-// components/admin/EditBike.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -59,9 +58,6 @@ export default function EditBike() {
   }, [id]);
 
   // Generic change handler:
-  // - decimal fields allow digits only (empty allowed)
-  // - colorOptions input is comma-separated string -> stored as array
-  // - checkbox handled normally
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -78,7 +74,7 @@ export default function EditBike() {
     }
 
     if (NUMBER_FIELDS.has(name)) {
-      // allow digits and optional single decimal point (empty string allowed)
+      // allow digits and single decimal point 
       if (/^\d*\.?\d*$/.test(value)) {
         setBike((p) => ({ ...p, [name]: value }));
       }
@@ -102,7 +98,7 @@ export default function EditBike() {
 
       // Convert number fields
       NUMBER_FIELDS.forEach((f) => {
-        // If field is empty string -> null (or you can choose fallback)
+        // If feild is empty string -> null 
         const raw = payload[f];
         payload[f] = raw === "" ? null : Number(raw);
       });
@@ -143,7 +139,7 @@ export default function EditBike() {
       <h2 className="text-xl sm:text-2xl font-bold mb-4 text-primary">✏️ Edit Bike</h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Basic Info (full width sections use col-span) */}
+        {/* Basic info */}
         <h3 className="col-span-1 md:col-span-2 text-lg font-semibold text-secondary">📌 Basic Info</h3>
 
         <label className="form-control">

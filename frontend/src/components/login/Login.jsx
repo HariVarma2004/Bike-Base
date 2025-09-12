@@ -1,10 +1,9 @@
-// src/components/Login.jsx (improved version)
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
-// Use environment variable for API base URL
+// Use env variable for API base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function Login() {

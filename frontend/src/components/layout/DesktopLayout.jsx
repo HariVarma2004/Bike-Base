@@ -1,4 +1,3 @@
-// Updated DesktopLayout.jsx to accept bike prop
 import { useState } from "react";
 import BikeVariant from "../ui/BikeVariant";
 import StatCard from "../ui/StatCard";

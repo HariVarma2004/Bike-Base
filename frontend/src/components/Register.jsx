@@ -1,4 +1,3 @@
-// src/components/Register.jsx (FIXED)
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -36,7 +35,7 @@ export default function Register() {
     try {
       console.log("Attempting to register user:", formData.email);
       
-      // Register the user only (no auto-login for now)
+      // Register the user only 
       const registerResponse = await axios.post("http://localhost:5000/api/auth/register", {
         name: formData.name,
         email: formData.email,

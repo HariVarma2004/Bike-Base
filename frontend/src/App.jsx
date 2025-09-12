@@ -7,8 +7,8 @@ import AllBikes from "./components/admin/AllBikes.jsx";
 import Users from "./components/admin/Users.jsx";
 import Explore from "./components/Explore/explore.jsx";
 import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
-import ContactUs from "./components/contactUs/Contact.jsx";
-import AboutUs from "./components/aboutUs/About.jsx";
+import ContactUs from "./components/ContactUs/contact.jsx";
+import AboutUs from "./components/AboutUs/about.jsx";
 import Login from "./components/login/Login";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
@@ -18,10 +18,10 @@ import EditBike from "./components/admin/EditBike.jsx";
 import EditUser from "./components/admin/EditUser.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
 // Blog components
-import BlogList from "./components/Blog/BlogList.jsx";
-import BlogPost from "./components/Blog/BlogPost.jsx";
-import BlogEditor from "./components/Blog/BlogEditor.jsx";
-import UserBlogDashboard from "./components/Blog/UserBlogDashboard.jsx";
+import BlogList from "./components/blog/BlogList.jsx";
+import BlogPost from "./components/blog/BlogPost.jsx";
+import BlogEditor from "./components/blog/BlogEditor.jsx";
+import UserBlogDashboard from "./components/blog/UserBlogDashboard.jsx";
 
 // Home
 import Home from "./components/home/Home.jsx";

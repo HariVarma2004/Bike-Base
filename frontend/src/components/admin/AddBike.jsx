@@ -1,4 +1,3 @@
-// components/admin/AddBikes.jsx
 import React, { useState } from "react";
 
 export default function AddBikes() {
@@ -36,7 +35,7 @@ export default function AddBikes() {
     setBike({ ...bike, [name]: type === "checkbox" ? checked : value });
   };
 
-  // ✅ only allow digits
+  // only allow digits
   const handleNumberChange = (e) => {
     const { name, value } = e.target;
     if (/^\d*$/.test(value)) {
@@ -86,7 +85,7 @@ export default function AddBikes() {
 
       if (!res.ok) throw new Error("Failed to add bike");
 
-      alert("✅ Bike added successfully!");
+      alert(" Bike added successfully!");
       setBike({
         brand: "",
         name: "",
@@ -113,7 +112,7 @@ export default function AddBikes() {
       });
     } catch (error) {
       console.error("Error adding bike:", error);
-      alert("❌ Failed to add bike. Check console.");
+      alert(" Failed to add bike. Check console.");
     } finally {
       setLoading(false);
     }

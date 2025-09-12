@@ -1,4 +1,3 @@
-// src/pages/ContactUs.jsx
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function ContactUs() {

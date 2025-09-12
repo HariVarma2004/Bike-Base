@@ -1,4 +1,3 @@
-// src/components/SearchResults.jsx
 import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";

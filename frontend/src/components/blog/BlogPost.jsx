@@ -6,7 +6,7 @@ const BlogPost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Sample data - replace with API call
+  // Sample data 
   useEffect(() => {
     const samplePosts = {
       'amazing-experience-trailblazer': {

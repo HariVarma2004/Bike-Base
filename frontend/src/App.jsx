@@ -23,7 +23,7 @@ import BlogEditor from "./components/Blog/BlogEditor.jsx";
 import UserBlogDashboard from "./components/Blog/UserBlogDashboard.jsx";
 
 // Import the Home component
-import Home from "./components/home/Home.jsx"; // Make sure the path is correct
+import Home from "./components/home/Home.jsx";
 
 function App() {
   return (

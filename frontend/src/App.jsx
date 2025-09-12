@@ -1,62 +1,195 @@
-import { useState } from "react";
-import MotovexLanding from "./components/MainComponent";
-import ProfilePage from "./components/ProfilePage/profile";
-import Home from "./components/home/Home";
-import BikeSpecs from "./components/bikespecs/BikeSpecs";
-import DukeImage from "./assets/Duke390.webp";
-import AboutSite from "./components/AboutUs/AboutSite";
+// App.jsx
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./components/layout/MainLayout.jsx";
+import AdminLayout from "./components/admin/AdminLayout.jsx";
+import AddBike from "./components/admin/AddBike.jsx";
+import AllBikes from "./components/admin/AllBikes.jsx";
+import Users from "./components/admin/Users.jsx";
+import Explore from "./components/Explore/explore.jsx";
+import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
+import ContactUs from "./components/contactUs/Contact.jsx";
+import AboutUs from "./components/aboutUs/About.jsx";
+import Login from "./components/login/Login";
+import Register from "./components/Register";
+import UserDashboard from "./components/UserDashboard";
+import AdminDashboard from "./components/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import EditBike from "./components/admin/EditBike.jsx";
+
+// Import the blog-related components
+import BlogList from "./components/Blog/BlogList.jsx";
+import BlogPost from "./components/Blog/BlogPost.jsx";
+import BlogEditor from "./components/Blog/BlogEditor.jsx";
+import UserBlogDashboard from "./components/Blog/UserBlogDashboard.jsx";
+
+// Import the Home component
+import Home from "./components/home/Home.jsx"; // Make sure the path is correct
 
 function App() {
-  const [activeBike] = useState({
-    id: 1,
-    brand: "KTM",
-    name: "Duke 390",
-    model: "390",
-    year: 2024,
-    price: 3.10,
-    description: "The KTM Duke 390 is a naked sport bike known for its aggressive styling and impressive performance. With a powerful 373.2cc liquid-cooled engine producing 43 HP and 37 Nm of torque, it offers an exhilarating riding experience.",
-    milage: 30,
-    engineCapacity: 373.2,
-    topSpeed: 167,
-    power: 43,
-    torque: 37,
-    fuelType: "Petrol",
-    transmission: "6-speed manual",
-    brakes: "Dual Channel ABS",
-    tires: "Michelin Pilot Street Radial",
-    suspension: "WP Apex",
-    weight: 149,
-    seatHeight: 800,
-    fuelCapacity: 13.4,
-    colorOptions: ["#FF6600", "#000000", "#FFFFFF"],
-    image: DukeImage,
-    available: true
-  });
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-100">
-      <section id="home">
-        <Home />
-      </section>
+    <BrowserRouter>
+      <Routes>
+        {/* Main Site wrapped in MainLayout */}
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <MainLayout>
+              <AboutUs />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <MainLayout>
+              <ContactUs />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <MainLayout>
+              <Explore />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/explore/bikespecs/:id"
+          element={
+            <MainLayout>
+              <BikeSpecs />
+            </MainLayout>
+          }
+        />
+        
+        {/* Blog Routes */}
+        <Route
+          path="/blog"
+          element={
+            <MainLayout>
+              <BlogList />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <MainLayout>
+              <BlogPost />
+            </MainLayout>
+          }
+        />
+        
+        {/* Auth Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
+        {/* Protected Routes */}
+        <Route
+          path="/user-dashboard"
+          element={
+            <ProtectedRoute role="user">
+              <MainLayout>
+                <UserDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute role="admin">
+              <MainLayout>
+                <AdminDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
 
-      {/* Pass bike prop to MotovexLanding
-      <main id="showcase">
-        <MotovexLanding bike={activeBike} />
-      </main> */}
+        {/* Admin Dashboard - PROTECTED ROUTES */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/add-bike"
+          element={
+            <ProtectedRoute role="admin">
+              <AddBike />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/all-bikes"
+          element={
+            <ProtectedRoute role="admin">
+              <AllBikes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/edit-bike/:id"
+          element={
+            <ProtectedRoute role="admin">
+              <EditBike />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute role="admin">
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Protected Blog Routes */}
+        <Route
+          path="/blog/edit/:id?"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <BlogEditor />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/blog"
+          element={
+            <ProtectedRoute role="user">
+              <MainLayout>
+                <UserBlogDashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
 
-      {/* Add BikeSpecs section and pass bike prop */}
-      {/* <section id="specifications">
-        <BikeSpecs bike={activeBike} />
-      </section> */}
-
-      <section id="profile">
-        <ProfilePage />
-      </section>
-
-      <section id="aboutSite">
-        <AboutSite />
-      </section>
-    </div>
+        {/* 404 */}
+        <Route
+          path="*"
+          element={
+            <MainLayout>
+              <h1 className="text-center mt-10">404 - Page Not Found</h1>
+            </MainLayout>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

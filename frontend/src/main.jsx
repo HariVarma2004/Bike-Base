@@ -19,6 +19,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
 import EditBike from "./components/admin/EditBike.jsx";
+import EditUser from "./components/admin/EditUser.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -126,6 +127,14 @@ createRoot(document.getElementById("root")).render(
           element={
             <ProtectedRoute role="admin">
               <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users/edit-user/:id"
+          element={
+            <ProtectedRoute role="admin">
+              <EditUser />
             </ProtectedRoute>
           }
         />

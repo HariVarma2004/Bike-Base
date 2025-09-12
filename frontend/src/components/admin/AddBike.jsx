@@ -163,7 +163,7 @@ export default function AddBikes() {
                 <span className="label-text font-semibold">{field.label}</span>
               </div>
               <input
-                type="text" // always text, validate manually
+                type="text" 
                 name={field.name}
                 value={bike[field.name]}
                 onChange={

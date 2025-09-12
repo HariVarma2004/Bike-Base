@@ -1,6 +1,5 @@
-// src/components/AboutUs/AboutSite.jsx
 import { useNavigate } from "react-router-dom";
-import HeroCon1 from "../../assets/Herocon3.jpg"; // make sure this path is correct
+import HeroCon1 from "../../assets/Herocon3.jpg"; 
 
 export default function AboutSite() {
   const navigate = useNavigate();

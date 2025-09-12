@@ -1,6 +1,6 @@
 import { Award, Globe2, MapPin, Activity } from "lucide-react";
 
-// Import your logo directly 
+// Import your logo 
 import Logo from "../../assets/Logo.png";
 
 export default function Profile() {
@@ -9,13 +9,8 @@ export default function Profile() {
       {/* Logo + Motive */}
       <div className="text-center mb-16">
         <img
-<<<<<<< HEAD
           src={Logo} 
-          alt="BikeBase Logo"
-=======
-          src={Logo} // Use the imported logo
           alt="Motovex Logo"
->>>>>>> fd3e0134d01d5d4c2f701b5354eb193e6d105bab
           className="mx-auto w-24 h-24 mb-4 drop-shadow-lg object-contain"
           onError={(e) => {
             // Fallback if image fails to load

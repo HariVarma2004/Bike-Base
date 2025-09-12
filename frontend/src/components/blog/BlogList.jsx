@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const BlogList = () => {
-  // Sample data - in a real app,  come from your API
+  // Sample data 
   const [blogPosts] = useState([
     {
       id: 1,

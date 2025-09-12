@@ -19,22 +19,22 @@ const desktopImages = [Hero9, Hero5, Hero6, Hero7, Hero8];
 // Portrait images for mobile devices
 const mobileImages = [Heromob1, Heromob2, Heromob3, Heromob4, Heromob5];
 
-// Custom object positions for each image to ensure optimal cropping on all devices
+// Custom object positions for each image 
 const desktopImagePositions = [
-  "center",  // for Hero9
-  "center",  // for Hero5
-  "center",  // for Hero6
-  "center",  // for Hero7
-  "center",  // for Hero8
+  "center",  
+  "center",  
+  "center",  
+  "center",  
+  "center",  
 ];
 
 // Custom positions for mobile images if needed
 const mobileImagePositions = [
-  "center",  // for MobileHero1
-  "center",  // for MobileHero2
-  "center",  // for MobileHero3
-  "center",  // for MobileHero4
-  "center",  // for MobileHero5
+  "center", 
+  "center", 
+  "center", 
+  "center", 
+  "center", 
 ];
 
 const Home = () => {
@@ -96,7 +96,7 @@ const Home = () => {
                 style={{ 
                   objectPosition: currentPositions[index] || "center",
                 }}
-                loading={index === 0 ? "eager" : "lazy"} // Only first image loads eagerly
+                loading={index === 0 ? "eager" : "lazy"} 
               />
             </div>
           </div>

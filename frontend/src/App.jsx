@@ -27,7 +27,6 @@ import Home from "./components/home/Home.jsx"; // Make sure the path is correct
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
         {/* Main Site wrapped in MainLayout */}
         <Route
@@ -189,7 +188,6 @@ function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
   );
 }
 

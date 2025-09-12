@@ -31,9 +31,7 @@ createRoot(document.getElementById("root")).render(
         <Route
           path="/"
           element={
-            <MainLayout>
               <App />
-            </MainLayout>
           }
         />
         <Route

@@ -29,13 +29,13 @@ const BlogEditor = () => {
   };
 
   return (
-    <div className="p-6 bg-base-100 min-h-screen">
+    <div className="p-4 sm:p-6 bg-base-100 min-h-screen">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
           {isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Post Type</span>
@@ -44,7 +44,7 @@ const BlogEditor = () => {
               name="type" 
               value={formData.type}
               onChange={handleChange}
-              className="select select-bordered"
+              className="select select-bordered w-full"
             >
               <option value="user_review">Rider Review</option>
               <option value="admin_post">Official Post</option>
@@ -60,7 +60,7 @@ const BlogEditor = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="input input-bordered"
+              className="input input-bordered w-full"
               placeholder="Enter post title"
               required
             />
@@ -77,7 +77,7 @@ const BlogEditor = () => {
                   name="bikeModel"
                   value={formData.bikeModel}
                   onChange={handleChange}
-                  className="input input-bordered"
+                  className="input input-bordered w-full"
                   placeholder="Which bike model are you reviewing?"
                   required
                 />
@@ -87,7 +87,7 @@ const BlogEditor = () => {
                 <label className="label">
                   <span className="label-text">Rating</span>
                 </label>
-                <div className="rating rating-lg">
+                <div className="rating rating-md sm:rating-lg justify-center sm:justify-start">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <input
                       key={star}
@@ -112,17 +112,17 @@ const BlogEditor = () => {
               name="content"
               value={formData.content}
               onChange={handleChange}
-              className="textarea textarea-bordered h-48"
+              className="textarea textarea-bordered w-full h-40 sm:h-48"
               placeholder="Write your post content here..."
               required
             />
           </div>
 
-          <div className="flex gap-4">
-            <button type="submit" className="btn btn-primary">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button type="submit" className="btn btn-primary flex-1 sm:flex-none">
               {isEditing ? 'Update Post' : 'Create Post'}
             </button>
-            <button type="button" className="btn btn-ghost">
+            <button type="button" className="btn btn-ghost flex-1 sm:flex-none">
               Cancel
             </button>
           </div>

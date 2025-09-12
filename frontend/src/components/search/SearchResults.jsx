@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
-import MainLayout from "./layout/MainLayout";
+import MainLayout from "../layout/MainLayout";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 

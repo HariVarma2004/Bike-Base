@@ -8,7 +8,7 @@ import Users from "./components/admin/Users.jsx";
 import Explore from "./components/Explore/explore.jsx";
 import BikeSpecs from "./components/bikespecs/BikeSpecs.jsx";
 import ContactUs from "./components/ContactUs/contact.jsx";
-import AboutUs from "./components/aboutUs/about.jsx";
+import AboutUs from "./components/AboutUs/about.jsx";
 import Login from "./components/login/Login";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
@@ -26,7 +26,7 @@ import UserBlogDashboard from "./components/blog/UserBlogDashboard.jsx";
 // Home
 import Home from "./components/home/Home.jsx";
 import Profile from "./components/ProfilePage/profile.jsx";
-import AboutSite from "./components/aboutUs/AboutSite.jsx";
+import AboutSite from "./components/AboutUs/AboutSite.jsx";
 // Import the Home component
 
 function App() {

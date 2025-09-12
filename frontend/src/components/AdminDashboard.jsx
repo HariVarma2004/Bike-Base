@@ -286,7 +286,7 @@ export default function AdminDashboard() {
       <div className="navbar bg-base-100 shadow-lg border-b border-base-300">
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-primary">
-            🌲 BikeBase <span className="text-base-content">Admin Portal</span>
+            🌲 Motovex <span className="text-base-content">Admin Portal</span>
           </h1>
         </div>
         <div className="flex-none gap-4">

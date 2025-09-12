@@ -10,7 +10,7 @@ export default function AboutSite() {
       {/* Background image fills the whole section */}
       <img
         src={HeroCon1}
-        alt="BikeBase Background"
+        alt="Motovex Background"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
@@ -20,11 +20,11 @@ export default function AboutSite() {
       {/* Content on top */}
       <div className="relative z-10">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-cyan-400">
-          Welcome to BikeBase
+          Welcome to Motovex
         </h2>
 
         <p className="max-w-2xl text-lg md:text-xl text-gray-200 mb-8">
-          BikeBase is your one-stop hub for bikers — from exploring top models,
+          Motovex is your one-stop hub for bikers — from exploring top models,
           sharing experiences, to finding trusted garages and accessories.
           Our mission is to build a strong biking community and marketplace.
         </p>

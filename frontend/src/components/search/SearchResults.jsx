@@ -21,6 +21,7 @@ export default function SearchResults() {
     }
   }, [query]);
 
+  
   const performSearch = async (searchQuery) => {
     setIsLoading(true);
     setError("");

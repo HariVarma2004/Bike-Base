@@ -77,7 +77,7 @@ export default function Register() {
         <div className="card-body p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-primary">Create Account</h1>
-            <p className="text-base-content mt-2">Join BikeBase today</p>
+            <p className="text-base-content mt-2">Join Motovex today</p>
           </div>
           
           {error && (

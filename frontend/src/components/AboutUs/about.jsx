@@ -5,9 +5,9 @@ export default function AboutUs() {
       {/* Title */}
       <h1 className="text-4xl font-extrabold mb-4 text-primary">About Us</h1>
       <p className="text-base-content/70 mb-12 text-center max-w-3xl">
-        BikeBase is more than just a platform — it’s a one-stop hub for all bike enthusiasts.  
+        Motovex is more than just a platform — it’s a one-stop hub for all bike enthusiasts.  
         Whether you’re into exploring specs, buying & selling bikes or parts, or sharing your biking journey,  
-        BikeBase brings the entire community together.
+        Motovex brings the entire community together.
       </p>
 
       {/* Core Features */}
@@ -29,7 +29,7 @@ export default function AboutUs() {
         <div className="bg-base-200 p-8 rounded-2xl shadow-lg hover:shadow-primary/30 transition">
           <h2 className="text-xl font-semibold text-secondary mb-3">💰 Marketplace</h2>
           <p className="text-base-content/80">
-            Buy and sell new or used bikes & parts easily. BikeBase makes it seamless to connect buyers and sellers.
+            Buy and sell new or used bikes & parts easily. Motovex makes it seamless to connect buyers and sellers.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function AboutUs() {
       <div className="mt-16 max-w-3xl text-center">
         <h2 className="text-2xl font-bold text-primary mb-4">Our Mission</h2>
         <p className="text-base-content/80">
-          At BikeBase, we aim to revolutionize how bikers interact with machines, parts, and each other.  
+          At Motovex, we aim to revolutionize how bikers interact with machines, parts, and each other.  
           From garages to communities, we’re building the future of biking culture — digital, connected, and rider-first.
         </p>
       </div>

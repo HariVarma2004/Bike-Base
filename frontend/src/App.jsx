@@ -130,14 +130,7 @@ function App() {
       />
 
       {/* Admin Dashboard */}
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute role="admin">
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      />
+     
       <Route
         path="/admin/add-bike"
         element={

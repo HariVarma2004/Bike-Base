@@ -27,6 +27,8 @@ import UserBlogDashboard from "./components/Blog/UserBlogDashboard.jsx";
 import Home from "./components/home/Home.jsx";
 import Profile from "./components/ProfilePage/profile.jsx";
 import AboutSite from "./components/aboutUs/AboutSite.jsx";
+// Import the Home component
+import Home from "./components/home/Home.jsx";
 
 function App() {
   return (

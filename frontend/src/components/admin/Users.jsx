@@ -33,7 +33,7 @@ export default function Users() {
     // Show a conformation dialog before proceeding
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+        const res = await fetch(`https://bike-base-backend-2rde.onrender.com/api/users/${userId}`, {
           method: "DELETE",
         });
 

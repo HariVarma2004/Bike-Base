@@ -114,7 +114,7 @@ export default function EditUser() {
         </div>
         <div className="flex gap-2 mt-4">
           <button type="submit" className="btn btn-primary">Save Changes</button>
-          <button type="button" onClick={() => navigate("/users")} className="btn btn-ghost">Cancel</button>
+          <button type="button" onClick={() => navigate("admin/users")} className="btn btn-ghost">Cancel</button>
         </div>
       </form>
     </div>

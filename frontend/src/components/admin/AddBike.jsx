@@ -113,11 +113,12 @@ export default function AddBikes() {
     };
 
     try {
-      const res = await fetch("https://bike-base-backend-2rde.onrender.com", {
+      const res = await fetch("https://bike-base-backend-2rde.onrender.com/api/bikes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
 
       if (!res.ok) throw new Error("Failed to add bike");
 

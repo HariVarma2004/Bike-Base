@@ -56,7 +56,7 @@ export default function AddBikes() {
 
     try {
       const res = await fetch(
-        `https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY`, // 🔑 replace with your key
+        `https://api.imgbb.com/1/upload?key=151058151545ec55350da9d98b6bcedb`, // 🔑 replace with your key
         {
           method: "POST",
           body: formData,

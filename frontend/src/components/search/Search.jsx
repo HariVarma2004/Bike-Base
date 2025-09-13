@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://bike-base-backend-2rde.onrender.com";
+const API_BASE_URL = "https://bike-base-backend-2rde.onrender.com";
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 const SearchBar = () => {

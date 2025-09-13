@@ -28,6 +28,7 @@ export default function AddBikes() {
 
   const [colorInput, setColorInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   // handle text / checkbox
   const handleChange = (e) => {
@@ -40,6 +41,41 @@ export default function AddBikes() {
     const { name, value } = e.target;
     if (/^\d*$/.test(value)) {
       setBike({ ...bike, [name]: value });
+    }
+  };
+
+  // upload image to ImgBB
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY`, // 🔑 replace with your key
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        setBike({ ...bike, image: data.data.url }); // store link in your state
+        alert("✅ Image uploaded successfully!");
+      } else {
+        alert("❌ Upload failed: " + data.error?.message);
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert("❌ Error uploading image");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -77,16 +113,15 @@ export default function AddBikes() {
     };
 
     try {
-      // const res = await fetch("http://localhost:5000/api/bikes", {
       const res = await fetch("https://bike-base-backend-2rde.onrender.com", {
-      method: "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       if (!res.ok) throw new Error("Failed to add bike");
 
-      alert(" Bike added successfully!");
+      alert("✅ Bike added successfully!");
       setBike({
         brand: "",
         name: "",
@@ -113,7 +148,7 @@ export default function AddBikes() {
       });
     } catch (error) {
       console.error("Error adding bike:", error);
-      alert(" Failed to add bike. Check console.");
+      alert("❌ Failed to add bike. Check console.");
     } finally {
       setLoading(false);
     }
@@ -144,7 +179,6 @@ export default function AddBikes() {
             { label: "Model", name: "model", type: "text" },
             { label: "Year", name: "year", type: "number" },
             { label: "Price", name: "price", type: "number" },
-            { label: "Image URL", name: "image", type: "text" },
             { label: "Mileage", name: "milage", type: "number" },
             { label: "Engine Capacity", name: "engineCapacity", type: "number" },
             { label: "Top Speed", name: "topSpeed", type: "number" },
@@ -164,7 +198,7 @@ export default function AddBikes() {
                 <span className="label-text font-semibold">{field.label}</span>
               </div>
               <input
-                type="text" 
+                type="text"
                 name={field.name}
                 value={bike[field.name]}
                 onChange={
@@ -176,6 +210,27 @@ export default function AddBikes() {
               />
             </label>
           ))}
+
+          {/* Image Upload */}
+          <label className="form-control w-full md:col-span-2">
+            <div className="label">
+              <span className="label-text font-semibold">Bike Image</span>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="file-input file-input-bordered w-full"
+            />
+            {uploading && <p className="text-sm text-warning">Uploading...</p>}
+            {bike.image && (
+              <img
+                src={bike.image}
+                alt="Preview"
+                className="mt-2 w-40 h-28 object-cover rounded-lg border"
+              />
+            )}
+          </label>
 
           {/* Color Options */}
           <div className="md:col-span-2">

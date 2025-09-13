@@ -109,7 +109,7 @@ export default function EditUser() {
             className="select select-bordered w-full"
           >
             <option value="user">User</option>
-            <option value="admin">Admin</option>
+            {/* <option value="admin">Admin</option> */}
           </select>
         </div>
         <div className="flex gap-2 mt-4">
